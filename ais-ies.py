@@ -1,4 +1,5 @@
 #LICENSE = GPL3 (Gnu Public License v3)
+#Produced under contract to Dstl 
 
 from rdflib import Graph, plugin, URIRef, BNode, Literal
 from rdflib.namespace import DC, DCAT, DCTERMS, OWL, RDF, RDFS, XMLNS, XSD
@@ -6,7 +7,7 @@ from rdflib.serializer import Serializer
 import uuid
 import Geohash   # (pip install Geohash but also pip install python-geohash )
 
-#Some sample AIS messages. Really simple stuff. At the request of CAN, we are not sending course, speed or activity class as that's what they intend to infer from the data
+#Some sample AIS messages. Really simple stuff. As requested, we are not sending course, speed or activity class as that's what they intend to infer from the data
 #Format is - mmsi, timestamp (in ISO8601 format), lat, lon
 ais=[
     ["366952890","2007-01-01T00:00:09",40.64175,-74.07136],
@@ -56,12 +57,6 @@ ins = URIRef(iesUri+"inScheme")
 ipa = URIRef(iesUri+"isPartOf")
 
 mmsiNs = URIRef(ituUri+"#mmsi-NamingScheme") #Make a URI for the MMSI naming schema from the ITU's URI 
-
-#Global variable (we love those) for the rdflib graph object. This is the lib we will use to format the IES data
-graph = Graph()
-graph.namespace_manager.bind('ies', iesUri)
-graph.namespace_manager.bind('iso8601', iso8601Uri)
-graph.namespace_manager.bind('data', dataUri)
 
 #this kinda speaks for itself. Creates a random (UUID) URI based on the dataUri stub
 def generateDataUri():
@@ -130,17 +125,16 @@ def mapAisPing(mmsi,timestamp,lat,lon,obs,iesGraph):
     gpPart = instantiate(iesGraph,observedLocation)
     addToGraph(iesGraph,gpPart,ipo,gp) #participation of the GeoPoint
     addToGraph(iesGraph,gpPart,ipi,lo) #participation in the LocationObservation
-   # ns["itu"] = ies.createObject([ies.iesUri("Organisation")],ituURI())
-  #  ns["itu"].addName("International Telecommunications Union",None,ies.iesUri("OrganisationName"))
-   # ns["imo"] = ies.createObject([ies.iesUri("Organisation")],imoURI())
-  #  ns["imo"].addName("International Maritime Organisation",None,ies.iesUri("OrganisationName"))
-  #  ns["mmsiNS"] = ies.createNamingScheme(mmsiNSURI(),ns["itu"])
-  #  ns["imoNS"] = ies.createNamingScheme(imoNSURI(),ns["imo"])
 
-    #
+
+
 
 #Run through the demo data and spit out the IES to stdout
 def testAIS():
+    graph = Graph()
+    graph.namespace_manager.bind('ies', iesUri)
+    graph.namespace_manager.bind('iso8601', iso8601Uri)
+    graph.namespace_manager.bind('data', dataUri)
     addNamingSchemes(graph)
     #To simulate this being a track, create a parent observation that all the location observations are part of:
     obs = instantiate(graph,observation)
