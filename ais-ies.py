@@ -93,17 +93,21 @@ def addNamingSchemes(iesGraph):
 def mapAisPing(mmsi,timestamp,lat,lon,obs,iesGraph):
     #add the location transponder - We don't know this is necessarily a vessel. All we know is that we have a LocationTransponder. Here it is:
     lt = URIRef(dataUri+"MMSI_"+mmsi)
-    instantiate(iesGraph,locationTransponder,lt) #This may already be in our dataset, byt addToGraph() function will spot this and it won't get written twice. RDFLib usually catches these, but belt'n'braces
+    instantiate(iesGraph,locationTransponder,lt) #This may already be in our dataset, but addToGraph() function will spot this and it won't get written twice. RDFLib usually catches these, but belt'n'braces
     #Add the id object
     ltId = URIRef(dataUri+"MMSI_"+mmsi+"_idObj")
     instantiate(iesGraph,commsIdentifier,ltId)
     addToGraph(iesGraph,ltId,rv,Literal(mmsi, datatype=XSD.string))
     addToGraph(iesGraph,lt,iib,ltId)
-    #Now put the comms ID in teh naming scheme...
+    #Now put the comms ID in the naming scheme...
     addToGraph(iesGraph,ltId,ins,mmsiNs)
     #Now create the observation event
     lo = instantiate(iesGraph,locationObservation)
     addToGraph(iesGraph,lo,ipa,obs)
+    #...and the ParticularPeriod in which the observation occurred
+    pp = URIRef(iso8601Uri+str(timestamp)) #The time is encoded in the URI so we can resolve on unique periods - this code assumes ISO8601 formatted timestamp...standards dear boy, standards !
+    instantiate(iesGraph,particularPeriod,pp)
+    addToGraph(iesGraph,lo,ip,pp)
     #And involve the transponder in that location observation
     ltPart = instantiate(iesGraph,observedTarget)
     addToGraph(iesGraph,ltPart,ipo,lt) #participation of the transponder
@@ -129,7 +133,7 @@ def mapAisPing(mmsi,timestamp,lat,lon,obs,iesGraph):
 
 
 
-#Run through the demo data and spit out the IES to stdout
+#Run through the demo data and spit out the IES to stdout, and save to a file
 def testAIS():
     graph = Graph()
     graph.namespace_manager.bind('ies', iesUri)
