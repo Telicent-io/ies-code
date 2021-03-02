@@ -104,7 +104,9 @@ def mapAisPing(mmsi,timestamp,lat,lon,obs,iesGraph):
     addToGraph(iesGraph,ltId,ins,mmsiNs)
     #Now create the observation event
     lo = instantiate(iesGraph,locationObservation)
-    addToGraph(iesGraph,lo,ipa,obs)
+    #If track emulation is not required, obs will be None. If it's not None, make the LocationObservation (lo) part of the overall track observation
+    if obs:
+        addToGraph(iesGraph,lo,ipa,obs)
     #...and the ParticularPeriod in which the observation occurred
     pp = URIRef(iso8601Uri+str(timestamp)) #The time is encoded in the URI so we can resolve on unique periods - this code assumes ISO8601 formatted timestamp...standards dear boy, standards !
     instantiate(iesGraph,particularPeriod,pp)
@@ -141,13 +143,18 @@ def testAIS():
     graph.namespace_manager.bind('iso8601', iso8601Uri)
     graph.namespace_manager.bind('data', dataUri)
     addNamingSchemes(graph)
-    #To simulate this being a track, create a parent observation that all the location observations are part of:
-    obs = instantiate(graph,observation)
+    #####IF YOU DON'T WANT A TRACK EMULATION, AND ALL YOU WANT ARE A BUNCH OF OBSERVATIONS, SET emulateTrack TO FALSE#####
+    emulateTrack = False
+    if emulateTrack:
+        #To simulate this being a track, create a parent observation that all the location observations are part of
+        obs = instantiate(graph,observation)
+    else:
+        obs = None
     for aisLine in ais:
         mapAisPing(aisLine[0],aisLine[1],aisLine[2],aisLine[3],obs,graph)
         rdfOut = graph.serialize(format="turtle").decode("utf-8") #Turtle(ttl) is a fairly readable format for RDF data
     print(rdfOut)
     graph.serialize(destination='output.ies.ttl', format='ttl')
     graph.remove((None, None, None)) #Clear the graph 
-    
+
 testAIS()
