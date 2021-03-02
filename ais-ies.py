@@ -55,6 +55,7 @@ so = URIRef(iesUri+"schemeOwner")
 rv = URIRef(iesUri+"representationValue")
 ins = URIRef(iesUri+"inScheme")
 ipa = URIRef(iesUri+"isPartOf")
+isoP = URIRef(iesUri+"iso8601PeriodRepresentation")
 
 mmsiNs = URIRef(ituUri+"#mmsi-NamingScheme") #Make a URI for the MMSI naming schema from the ITU's URI 
 
@@ -147,5 +148,6 @@ def testAIS():
         rdfOut = graph.serialize(format="turtle").decode("utf-8") #Turtle(ttl) is a fairly readable format for RDF data
     print(rdfOut)
     graph.serialize(destination='output.ies.ttl', format='ttl')
-
+    graph.remove((None, None, None)) #Clear the graph 
+    
 testAIS()
