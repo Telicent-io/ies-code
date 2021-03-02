@@ -126,8 +126,8 @@ def mapAisPing(mmsi,timestamp,lat,lon,obs,iesGraph):
     addToGraph(iesGraph,gp,iib,latObj)
     addToGraph(iesGraph,gp,iib,lonObj)
     #Add the representation values to the lat and lon objects
-    addToGraph(iesGraph,latObj,rv,Literal(lat, datatype=XSD.decimal))
-    addToGraph(iesGraph,lonObj,rv,Literal(lon, datatype=XSD.decimal))
+    addToGraph(iesGraph,latObj,rv,Literal(lat, datatype=XSD.string))
+    addToGraph(iesGraph,lonObj,rv,Literal(lon, datatype=XSD.string))
     #Now the participation of the GeoPoint in the Observation
     gpPart = instantiate(iesGraph,observedLocation)
     addToGraph(iesGraph,gpPart,ipo,gp) #participation of the GeoPoint
