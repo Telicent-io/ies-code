@@ -43,7 +43,15 @@ namingScheme = URIRef(iesUri+"NamingScheme")
 latitude = URIRef(iesUri+"Latitude")
 longitude = URIRef(iesUri+"Longitude")
 commsIdentifier = URIRef(iesUri+"CommunicationsIdentifier")
-
+follow = URIRef(iesUri+"Follow")
+follower = URIRef(iesUri+"Follower")
+followed = URIRef(iesUri+"Followed")
+boundingState = URIRef(iesUri+"BoundingState")
+possibleWorld = URIRef(iesUri+"PossibleWorld")
+system = URIRef(iesUri+"System")
+assess = URIRef(iesUri+"Assess")
+assessor = URIRef(iesUri+"Assessor")
+name = URIRef(iesUri+"Name")
 
 #Now the IES predicates (properties / relationships) we'll be using
 ipo = URIRef(iesUri+"isParticipationOf")
@@ -54,8 +62,13 @@ ip = URIRef(iesUri+"inPeriod")
 so = URIRef(iesUri+"schemeOwner")
 rv = URIRef(iesUri+"representationValue")
 ins = URIRef(iesUri+"inScheme")
-ipa = URIRef(iesUri+"isPartOf")
+ipao = URIRef(iesUri+"isPartOf")
 isoP = URIRef(iesUri+"iso8601PeriodRepresentation")
+iso = URIRef(iesUri+"isStartOf")
+ieo = URIRef(iesUri+"isEndOf")
+ass = URIRef(iesUri+"assessed")
+
+
 
 mmsiNs = URIRef(ituUri+"#mmsi-NamingScheme") #Make a URI for the MMSI naming schema from the ITU's URI 
 
@@ -63,19 +76,51 @@ mmsiNs = URIRef(ituUri+"#mmsi-NamingScheme") #Make a URI for the MMSI naming sch
 def generateDataUri():
     return(URIRef(dataUri+str(uuid.uuid4())))
 
+#Check to see if a triple is already in our graph
+def inGraph(iesGraph,subject,predicate,obj):
+    return (subject, predicate, obj) in iesGraph
+
 #We use this function to check if we've already got this triple in the graph before creating it - rdflib should deal with this, but we've had a few issues, and this also helps a bit with performance
-def addToGraph(graph,subject,predicate,obj):
-    print(subject, predicate, obj)
-    if (subject, predicate, obj) not in graph:
-        graph.add((subject, predicate, obj))
+def addToGraph(iesGraph,subject,predicate,obj):
+    if not inGraph(iesGraph,subject, predicate, obj):
+        iesGraph.add((subject, predicate, obj))
 
 #Convenience function to create an instance of a class
-def instantiate(graph,_class,instance=None):
+def instantiate(iesGraph,_class,instance=None):
     if instance == None:
         #Make a uri based on the data stub...
         instance = generateDataUri()
-    addToGraph(graph,instance,RDF.type,_class)
+    addToGraph(iesGraph,instance,RDF.type,_class)
     return(instance)
+
+#Puts an item in a particular period
+def putInPeriod(iesGraph,item,iso8601TimeString):
+    pp = URIRef(iso8601Uri+str(iso8601TimeString)) #The time is encoded in the URI so we can resolve on unique periods - this code assumes ISO8601 formatted timestamp...standards dear boy, standards !
+    instantiate(iesGraph,particularPeriod,pp)
+    addToGraph(iesGraph,item,ip,pp)
+    return pp
+
+#Asserts an item started in a particular period
+def startsIn(iesGraph,item,iso8601TimeString):
+    bs = instantiate(iesGraph,boundingState)
+    addToGraph(iesGraph,bs,iso,item)
+    putInPeriod(iesGraph,bs,iso8601TimeString)
+
+#Asserts an item ended in a particular period
+def endsIn(iesGraph,item,iso8601TimeString):
+    bs = instantiate(iesGraph,boundingState)
+    addToGraph(iesGraph,bs,ieo,item)
+    putInPeriod(iesGraph,bs,iso8601TimeString)
+
+def addName(iesGraph,item,nameString,nameType=None,namingScheme=None):
+    if not nameType:
+        nameType = name
+    myName = instantiate(iesGraph,nameType)
+    addToGraph(iesGraph,myName,rv,Literal(nameString, datatype=XSD.string))
+    addToGraph(iesGraph,item,hn,myName)
+    if namingScheme:
+        addToGraph(iesGraph,myName,ins,namingScheme)
+    return myName
 
 #add boilerplate stuff
 def addNamingSchemes(iesGraph):
@@ -85,32 +130,37 @@ def addNamingSchemes(iesGraph):
     #Now let's make the ITU the owner of the namingScheme
     instantiate(iesGraph, organisation,URIRef(ituUri))
     #Now add a name for the ITU organisation
-    ituName = Literal("International Telecommunications Union", datatype=XSD.string) #wrap the text in a literal object to keep rdflib happy !
-    addToGraph(iesGraph,URIRef(ituUri),hn,ituName)
+    addName(iesGraph,URIRef(ituUri),"International Telecommunications Union")
     #Make the ITU the owner of that naming scheme
     addToGraph(iesGraph,mmsiNs,so,URIRef(ituUri))
 
+def createLocationTransponder(iesGraph,mmsi):
+    #COnstruct a URI based on its mmsi
+    myLT = URIRef(dataUri+"MMSI_"+mmsi)
+    #Check to see if we already have it in the graph, and create if not - rdflib should just overwrite, but we've seen some exceptions so best to check
+    if not inGraph(iesGraph,myLT,RDF.type,locationTransponder):
+        instantiate(iesGraph,locationTransponder,myLT)
+        #Add the id object
+        ltId = URIRef(dataUri+"MMSI_"+mmsi+"_idObj")
+        instantiate(iesGraph,commsIdentifier,ltId)
+        addToGraph(iesGraph,ltId,rv,Literal(mmsi, datatype=XSD.string))
+        addToGraph(iesGraph,myLT,iib,ltId)
+        #Now put the comms ID in the naming scheme...
+        addToGraph(iesGraph,ltId,ins,mmsiNs)
+    return myLT
+
 #Simple function to process a line of AIS in IES. It expects mmsi, timestamp (in ISO8601 format), lat, lon
-def mapAisPing(mmsi,timestamp,lat,lon,obs,iesGraph):
-    #add the location transponder - We don't know this is necessarily a vessel. All we know is that we have a LocationTransponder. Here it is:
-    lt = URIRef(dataUri+"MMSI_"+mmsi)
-    instantiate(iesGraph,locationTransponder,lt) #This may already be in our dataset, but addToGraph() function will spot this and it won't get written twice. RDFLib usually catches these, but belt'n'braces
-    #Add the id object
-    ltId = URIRef(dataUri+"MMSI_"+mmsi+"_idObj")
-    instantiate(iesGraph,commsIdentifier,ltId)
-    addToGraph(iesGraph,ltId,rv,Literal(mmsi, datatype=XSD.string))
-    addToGraph(iesGraph,lt,iib,ltId)
-    #Now put the comms ID in the naming scheme...
-    addToGraph(iesGraph,ltId,ins,mmsiNs)
+def createLocationObservation(iesGraph,mmsi,timestamp,lat,lon,obs=None):
+    print(mmsi,timestamp)
+    #add the location transponder - We don't know this is necessarily a vessel. All we know is that we have a LocationTransponder. 
+    lt = createLocationTransponder(iesGraph,mmsi)
     #Now create the observation event
     lo = instantiate(iesGraph,locationObservation)
     #If track emulation is not required, obs will be None. If it's not None, make the LocationObservation (lo) part of the overall track observation
     if obs:
-        addToGraph(iesGraph,lo,ipa,obs)
+        addToGraph(iesGraph,lo,ipao,obs)
     #...and the ParticularPeriod in which the observation occurred
-    pp = URIRef(iso8601Uri+str(timestamp)) #The time is encoded in the URI so we can resolve on unique periods - this code assumes ISO8601 formatted timestamp...standards dear boy, standards !
-    instantiate(iesGraph,particularPeriod,pp)
-    addToGraph(iesGraph,lo,ip,pp)
+    putInPeriod(iesGraph,lo,timestamp)
     #And involve the transponder in that location observation
     ltPart = instantiate(iesGraph,observedTarget)
     addToGraph(iesGraph,ltPart,ipo,lt) #participation of the transponder
@@ -134,27 +184,64 @@ def mapAisPing(mmsi,timestamp,lat,lon,obs,iesGraph):
     addToGraph(iesGraph,gpPart,ipi,lo) #participation in the LocationObservation
 
 
+#A simple parent observation to group the others into track
+def createTrack(iesGraph):
+    return instantiate(iesGraph,observation)
 
 
-#Run through the demo data and spit out the IES to stdout, and save to a file
-def testAIS():
-    graph = Graph()
-    graph.namespace_manager.bind('ies', iesUri)
-    graph.namespace_manager.bind('iso8601', iso8601Uri)
-    graph.namespace_manager.bind('data', dataUri)
-    addNamingSchemes(graph)
-    #####IF YOU DON'T WANT A TRACK EMULATION, AND ALL YOU WANT ARE A BUNCH OF OBSERVATIONS, SET emulateTrack TO FALSE#####
-    emulateTrack = False
-    if emulateTrack:
-        #To simulate this being a track, create a parent observation that all the location observations are part of
-        obs = instantiate(graph,observation)
-    else:
-        obs = None
-    for aisLine in ais:
-        mapAisPing(aisLine[0],aisLine[1],aisLine[2],aisLine[3],obs,graph)
-        rdfOut = graph.serialize(format="turtle").decode("utf-8") #Turtle(ttl) is a fairly readable format for RDF data
-    print(rdfOut)
-    graph.serialize(destination='output.ies.ttl', format='ttl')
+
+def saveRdf(graph,filename):
+    graph.serialize(destination=filename, format='ttl')
     graph.remove((None, None, None)) #Clear the graph 
 
-testAIS()
+def createSystem(iesGraph,sysName):
+    sys = instantiate(iesGraph,system)
+
+def following(iesGraph,followerMMSI, followedMMSI, startTimeStamp, endTimeStamp,inferenceSystem):
+    #Create the follow event object
+    fol = instantiate(iesGraph,follow)
+    #Now put the start and end on the following event...
+    startsIn(iesGraph,fol,startTimeStamp)
+    endsIn(iesGraph,fol,endTimeStamp)
+
+    #create this follower and followed transponders - these may already be i the graph, but this should get caught
+    followerURI = createLocationTransponder(iesGraph,followerMMSI)
+    followedURI = createLocationTransponder(iesGraph,followedMMSI)
+    #Now create the participations of the follower and followed
+    folrPart = instantiate(iesGraph,follower)
+    addToGraph(iesGraph,folrPart,ipi,fol)
+    addToGraph(iesGraph,folrPart,ipo,followerURI)
+    foldPart = instantiate(iesGraph,followed)
+    addToGraph(iesGraph,foldPart,ipi,fol)
+    addToGraph(iesGraph,foldPart,ipo,followedURI)
+    if (inferenceSystem):
+        pw = instantiate(iesGraph,possibleWorld)
+        addToGraph(iesGraph,fol,ipao,pw)
+        assessment = instantiate(iesGraph,assess)
+        addToGraph(iesGraph,assessment,ass,pw)
+        assr = instantiate(iesGraph,assessor)
+        addToGraph(iesGraph,assr,ipi,assessment)
+        addToGraph(iesGraph,assr,ipo,inferenceSystem)
+
+    
+
+#set up the RDF graph
+graph = Graph()
+graph.namespace_manager.bind('ies', iesUri)
+graph.namespace_manager.bind('iso8601', iso8601Uri)
+graph.namespace_manager.bind('data', dataUri)
+addNamingSchemes(graph)
+#Add a parent observation
+#obs = createTrack(graph) #comment this line out to prevent a track being created
+#run the positions data through
+#for aisLine in ais:
+ #   createLocationObservation(aisLine[0],aisLine[1],aisLine[2],aisLine[3],obs,graph)
+
+#Now say one is following the other (they're not, but I didn't have any data where ships followed each other)
+#First we create an object for the system that detected it. 
+hal = instantiate(graph,system)
+addName(graph,hal,"HAL")
+#now create the following pattern, with our system included as the assessor
+following(graph,"367000150","366952890","2007-01-01T00:00:09","2007-01-01T00:05:40",hal)
+
+saveRdf(graph,'output.ies.ttl')
