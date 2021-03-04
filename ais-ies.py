@@ -222,6 +222,8 @@ def following(iesGraph,followerMMSI, followedMMSI, startTimeStamp, endTimeStamp,
         assr = instantiate(iesGraph,assessor)
         addToGraph(iesGraph,assr,ipi,assessment)
         addToGraph(iesGraph,assr,ipo,inferenceSystem)
+        #Now put the assessment in a period - i.e. when the assessment was done
+        putInPeriod(iesGraph,assessment,"2007-01-02T09:17:04")
 
     
 
