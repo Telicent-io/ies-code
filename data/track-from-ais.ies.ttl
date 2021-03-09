@@ -1,86 +1,90 @@
 @prefix data: <http://ais.data.gov.uk/ais-ies-test#> .
 @prefix ies: <http://ies.data.gov.uk/ontology/ies4#> .
+@prefix iso8601: <http://iso.org/iso8601#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-data:0cb50e17-2637-4c6f-a011-36e1e4921606 a ies:ObservedLocation ;
-    ies:isParticipantIn data:dac5db37-806c-4c9d-9e22-5371cd2f65df ;
-    ies:isParticipationOf data:geohash_dr5r4qwgk5qf .
-
-data:122d2616-4de3-498a-8eca-4c0828b9c262 a ies:ObservedLocation ;
-    ies:isParticipantIn data:fa83f7f8-bfed-4f12-a785-3fe97025477b ;
-    ies:isParticipationOf data:geohash_dr5r4qwgkjnv .
-
-data:1cd99acd-901d-4348-b800-a08d4c67877b a ies:ObservedTarget ;
-    ies:isParticipantIn data:55e19a1b-3c5f-45d9-9723-328cd40d462d ;
-    ies:isParticipationOf data:MMSI_367000150 .
-
-data:1d2fb970-f372-415b-bdf3-f8cc8dcfbb00 a ies:ObservedLocation ;
-    ies:isParticipantIn data:fafd6ff4-fe2f-4041-9997-e29be1ae3854 ;
-    ies:isParticipationOf data:geohash_dr5r4qtu8d3y .
-
-data:25b310fa-e4c3-4b15-96fe-734362c7641c a ies:ObservedTarget ;
-    ies:isParticipantIn data:10897f80-97f5-4f6d-b56b-8cbb7d365403 ;
-    ies:isParticipationOf data:MMSI_366952890 .
-
-data:2fc51cb2-6817-493f-8728-2f7935c708ed a ies:ObservedTarget ;
-    ies:isParticipantIn data:54685d47-418a-40ef-a2d6-f605abd17fef ;
-    ies:isParticipationOf data:MMSI_366952890 .
-
-data:5a8d5ee7-402e-4386-beb3-3e0dd5402355 a ies:ObservedTarget ;
-    ies:isParticipantIn data:5bbf17ac-7692-40b5-b463-3a88fc6c7c79 ;
-    ies:isParticipationOf data:MMSI_366952890 .
-
-data:6fc8a680-db00-4b62-b486-cc6d6c20945c a ies:ObservedLocation ;
-    ies:isParticipantIn data:5bbf17ac-7692-40b5-b463-3a88fc6c7c79 ;
-    ies:isParticipationOf data:geohash_dr5r4qwg7tpv .
-
-data:7263e0d4-91ef-4bd4-a834-67a9ecf7e2bf a ies:ObservedTarget ;
-    ies:isParticipantIn data:fa83f7f8-bfed-4f12-a785-3fe97025477b ;
-    ies:isParticipationOf data:MMSI_366952890 .
-
-data:76ad4a64-d724-4f9a-9f5d-92e0e92d28e8 a ies:ObservedTarget ;
-    ies:isParticipantIn data:08111b48-cd49-4b30-8e78-0040b87f728e ;
-    ies:isParticipationOf data:MMSI_366952890 .
-
-data:80e3ec55-1ac4-4e27-8ae5-3b5f9ad6b0f0 a ies:ObservedLocation ;
-    ies:isParticipantIn data:4c91ba3b-8dd8-45ed-a31a-75af2c1d86d8 ;
-    ies:isParticipationOf data:geohash_dr5r4qtu847n .
-
-data:829a7b49-35d4-458e-aea2-894aa24101c1 a ies:ObservedLocation ;
-    ies:isParticipantIn data:dc63d588-9d45-487f-95ca-5ba8a3ff6136 ;
-    ies:isParticipationOf data:geohash_dr5r4qwgk7q6 .
-
-data:8a1ee86d-0a21-4e62-8ec8-f9cb4fab10f5 a ies:ObservedTarget ;
-    ies:isParticipantIn data:dc63d588-9d45-487f-95ca-5ba8a3ff6136 ;
-    ies:isParticipationOf data:MMSI_366952890 .
-
-data:8acad501-da1d-48ed-9511-589a5658e637 a ies:ObservedLocation ;
-    ies:isParticipantIn data:55e19a1b-3c5f-45d9-9723-328cd40d462d ;
+data:1981906b-f389-43ef-89da-bd8da95a79ae a ies:ObservedLocation ;
+    ies:isParticipantIn data:7eb8c5bd-9da6-4dfb-aba7-023b5ed5eb8c ;
     ies:isParticipationOf data:geohash_dr5r4qtu8h74 .
 
-data:93d3460f-0146-4db8-bed7-c1905604bdf8 a ies:ObservedLocation ;
-    ies:isParticipantIn data:54685d47-418a-40ef-a2d6-f605abd17fef ;
-    ies:isParticipationOf data:geohash_dr5r4qwgk7q6 .
+data:22989427-87a4-4948-b3d1-a840cd6be9de a ies:ObservedLocation ;
+    ies:isParticipantIn data:ae8b160c-7da3-4393-9f8a-2a6fe60d24c5 ;
+    ies:isParticipationOf data:geohash_dr5r4qtu847n .
 
-data:c6d5e8be-8eee-4c31-b4d7-d5c4feebdb94 a ies:ObservedLocation ;
-    ies:isParticipantIn data:10897f80-97f5-4f6d-b56b-8cbb7d365403 ;
-    ies:isParticipationOf data:geohash_dr5r4qwg7tpv .
-
-data:cbc650a1-7f62-48a2-b94e-f6bc0fe38011 a ies:ObservedTarget ;
-    ies:isParticipantIn data:dac5db37-806c-4c9d-9e22-5371cd2f65df ;
+data:47b26b9a-638d-465f-83ca-6fc51ebc96c1 a ies:ObservedTarget ;
+    ies:isParticipantIn data:f47f0c95-02a7-477e-8dfb-fb140f0d6651 ;
     ies:isParticipationOf data:MMSI_366952890 .
 
-data:d86bba6c-f182-41cd-ba18-581f8652b0ea a ies:ObservedTarget ;
-    ies:isParticipantIn data:4c91ba3b-8dd8-45ed-a31a-75af2c1d86d8 ;
-    ies:isParticipationOf data:MMSI_367000150 .
+data:7e185e7e-3279-4a54-b320-483c7f0b1fdb a ies:ObservedLocation ;
+    ies:isParticipantIn data:ea3e1691-a995-4d84-97df-e9569677fe80 ;
+    ies:isParticipationOf data:geohash_dr5r4qtu8d3y .
 
-data:f48f24fd-9d97-478b-ac10-595f26d49b9b a ies:ObservedTarget ;
-    ies:isParticipantIn data:fafd6ff4-fe2f-4041-9997-e29be1ae3854 ;
-    ies:isParticipationOf data:MMSI_367000150 .
+data:88cee178-430e-4480-a355-1fd26f6cc9ae a ies:ObservedTarget ;
+    ies:isParticipantIn data:5989d5e2-d418-4095-8861-5446caa24700 ;
+    ies:isParticipationOf data:MMSI_366952890 .
 
-data:ff78dbf0-2f8e-461a-b04c-20482e0f0356 a ies:ObservedLocation ;
-    ies:isParticipantIn data:08111b48-cd49-4b30-8e78-0040b87f728e ;
+data:8d0b6501-4ca2-48d1-9260-b40eada32ee2 a ies:ObservedTarget ;
+    ies:isParticipantIn data:d6282065-830b-4205-a8b7-ad4784608bf8 ;
+    ies:isParticipationOf data:MMSI_366952890 .
+
+data:92ccb422-b7c8-4a9a-a65b-724e10683622 a ies:ObservedTarget ;
+    ies:isParticipantIn data:fa9dda23-5dbf-422e-9a64-033f969ef6ca ;
+    ies:isParticipationOf data:MMSI_366952890 .
+
+data:9bc72f77-416f-4888-a3f8-22bd84f8b578 a ies:ObservedLocation ;
+    ies:isParticipantIn data:5989d5e2-d418-4095-8861-5446caa24700 ;
     ies:isParticipationOf data:geohash_dr5r4qwgk5qf .
+
+data:9e3fa88b-ab1e-4a02-a47b-5d41efca4f1c a ies:ObservedLocation ;
+    ies:isParticipantIn data:f47f0c95-02a7-477e-8dfb-fb140f0d6651 ;
+    ies:isParticipationOf data:geohash_dr5r4qwgk7q6 .
+
+data:a8054ecf-9be6-4cb5-b751-e89f610b6640 a ies:ObservedTarget ;
+    ies:isParticipantIn data:424deedf-adcf-4049-949e-a4a19aa6cfde ;
+    ies:isParticipationOf data:MMSI_366952890 .
+
+data:aefc6718-73b4-48df-a34e-0c02c978946b a ies:ObservedTarget ;
+    ies:isParticipantIn data:e3fbc3af-d11c-4fa7-b46f-8494f130036c ;
+    ies:isParticipationOf data:MMSI_366952890 .
+
+data:b71e57e6-34a6-4e8b-b583-c081265f5693 a ies:ObservedTarget ;
+    ies:isParticipantIn data:82d3c656-9879-4069-b22a-accf8f7ba18a ;
+    ies:isParticipationOf data:MMSI_366952890 .
+
+data:bdf94bcd-c1d8-4396-939c-9a663a0e7291 a ies:ObservedTarget ;
+    ies:isParticipantIn data:7eb8c5bd-9da6-4dfb-aba7-023b5ed5eb8c ;
+    ies:isParticipationOf data:MMSI_367000150 .
+
+data:cb768dc5-6bcf-4a94-ba08-0e61cfd2f27a a ies:ObservedLocation ;
+    ies:isParticipantIn data:fa9dda23-5dbf-422e-9a64-033f969ef6ca ;
+    ies:isParticipationOf data:geohash_dr5r4qwgkjnv .
+
+data:ccd4a05b-c36e-4556-95e7-b971deb5d01d a ies:ObservedLocation ;
+    ies:isParticipantIn data:e3fbc3af-d11c-4fa7-b46f-8494f130036c ;
+    ies:isParticipationOf data:geohash_dr5r4qwg7tpv .
+
+data:ccda9e04-46c1-48d1-a1b4-611811a9ee37 a ies:ObservedLocation ;
+    ies:isParticipantIn data:82d3c656-9879-4069-b22a-accf8f7ba18a ;
+    ies:isParticipationOf data:geohash_dr5r4qwg7tpv .
+
+data:f9ece8fa-bb2f-4e66-97a8-92e56e75f914 a ies:ObservedTarget ;
+    ies:isParticipantIn data:ae8b160c-7da3-4393-9f8a-2a6fe60d24c5 ;
+    ies:isParticipationOf data:MMSI_367000150 .
+
+data:fa4e4161-dceb-4a0c-a782-03681c6741c6 a ies:ObservedLocation ;
+    ies:isParticipantIn data:424deedf-adcf-4049-949e-a4a19aa6cfde ;
+    ies:isParticipationOf data:geohash_dr5r4qwgk7q6 .
+
+data:fafc9906-a123-48a2-8b5d-93622120aff8 a ies:ObservedTarget ;
+    ies:isParticipantIn data:ea3e1691-a995-4d84-97df-e9569677fe80 ;
+    ies:isParticipationOf data:MMSI_367000150 .
+
+data:fd9814aa-cdf7-4d2e-b713-a7959d247e48 a ies:ObservedLocation ;
+    ies:isParticipantIn data:d6282065-830b-4205-a8b7-ad4784608bf8 ;
+    ies:isParticipationOf data:geohash_dr5r4qwgk5qf .
+
+data:8b719472-8d5a-4d92-b4b1-ed86258c9086 a ies:Name ;
+    ies:representationValue "International Telecommunications Union"^^xsd:string .
 
 data:MMSI_366952890_idObj a ies:CommunicationsIdentifier ;
     ies:inScheme <http://itu.int#mmsi-NamingScheme> ;
@@ -95,91 +99,121 @@ data:geohash_dr5r4qtu847n a ies:GeoPoint ;
         data:geohash_dr5r4qtu847n_lon .
 
 data:geohash_dr5r4qtu847n_lat a ies:Latitude ;
-    ies:representationValue 40.64196 .
+    ies:representationValue "40.64196"^^xsd:string .
 
 data:geohash_dr5r4qtu847n_lon a ies:Longitude ;
-    ies:representationValue -74.07291 .
+    ies:representationValue "-74.07291"^^xsd:string .
 
 data:geohash_dr5r4qtu8d3y a ies:GeoPoint ;
     ies:isIdentifiedBy data:geohash_dr5r4qtu8d3y_lat,
         data:geohash_dr5r4qtu8d3y_lon .
 
 data:geohash_dr5r4qtu8d3y_lat a ies:Latitude ;
-    ies:representationValue 40.64196 .
+    ies:representationValue "40.64196"^^xsd:string .
 
 data:geohash_dr5r4qtu8d3y_lon a ies:Longitude ;
-    ies:representationValue -74.07289 .
+    ies:representationValue "-74.07289"^^xsd:string .
 
 data:geohash_dr5r4qtu8h74 a ies:GeoPoint ;
     ies:isIdentifiedBy data:geohash_dr5r4qtu8h74_lat,
         data:geohash_dr5r4qtu8h74_lon .
 
 data:geohash_dr5r4qtu8h74_lat a ies:Latitude ;
-    ies:representationValue 40.64197 .
+    ies:representationValue "40.64197"^^xsd:string .
 
 data:geohash_dr5r4qtu8h74_lon a ies:Longitude ;
-    ies:representationValue -74.07291 .
+    ies:representationValue "-74.07291"^^xsd:string .
 
 data:geohash_dr5r4qwg7tpv_lat a ies:Latitude ;
-    ies:representationValue 40.64176 .
+    ies:representationValue "40.64176"^^xsd:string .
 
 data:geohash_dr5r4qwg7tpv_lon a ies:Longitude ;
-    ies:representationValue -74.07138 .
+    ies:representationValue "-74.07138"^^xsd:string .
 
 data:geohash_dr5r4qwgk5qf_lat a ies:Latitude ;
-    ies:representationValue 40.64175 .
+    ies:representationValue "40.64175"^^xsd:string .
 
 data:geohash_dr5r4qwgk5qf_lon a ies:Longitude ;
-    ies:representationValue -74.07136 .
+    ies:representationValue "-74.07136"^^xsd:string .
 
 data:geohash_dr5r4qwgk7q6_lat a ies:Latitude ;
-    ies:representationValue 40.64175 .
+    ies:representationValue "40.64175"^^xsd:string .
 
 data:geohash_dr5r4qwgk7q6_lon a ies:Longitude ;
-    ies:representationValue -74.07135 .
+    ies:representationValue "-74.07135"^^xsd:string .
 
 data:geohash_dr5r4qwgkjnv a ies:GeoPoint ;
     ies:isIdentifiedBy data:geohash_dr5r4qwgkjnv_lat,
         data:geohash_dr5r4qwgkjnv_lon .
 
 data:geohash_dr5r4qwgkjnv_lat a ies:Latitude ;
-    ies:representationValue 40.64176 .
+    ies:representationValue "40.64176"^^xsd:string .
 
 data:geohash_dr5r4qwgkjnv_lon a ies:Longitude ;
-    ies:representationValue -74.07136 .
+    ies:representationValue "-74.07136"^^xsd:string .
+
+iso8601:2007-01-01T00:00:09 a ies:ParticularPeriod .
+
+iso8601:2007-01-01T00:01:20 a ies:ParticularPeriod .
+
+iso8601:2007-01-01T00:01:57 a ies:ParticularPeriod .
+
+iso8601:2007-01-01T00:02:29 a ies:ParticularPeriod .
+
+iso8601:2007-01-01T00:03:38 a ies:ParticularPeriod .
+
+iso8601:2007-01-01T00:04:39 a ies:ParticularPeriod .
+
+iso8601:2007-01-01T00:04:55 a ies:ParticularPeriod .
+
+iso8601:2007-01-01T00:05:40 a ies:ParticularPeriod .
+
+iso8601:2007-01-01T00:06:50 a ies:ParticularPeriod .
+
+iso8601:2007-01-01T00:07:56 a ies:ParticularPeriod .
 
 <http://itu.int> a ies:Organisation ;
-    ies:hasName "International Telecommunications Union"^^xsd:string .
+    ies:hasName data:8b719472-8d5a-4d92-b4b1-ed86258c9086 .
 
-data:08111b48-cd49-4b30-8e78-0040b87f728e a ies:LocationObservation ;
-    ies:isPartOf data:1996e24c-e692-45de-ae0e-8b8d957c9426 .
+data:424deedf-adcf-4049-949e-a4a19aa6cfde a ies:LocationObservation ;
+    ies:inPeriod iso8601:2007-01-01T00:01:20 ;
+    ies:isPartOf data:02dc7f41-2714-40ce-85fd-3bae07a979c9 .
 
-data:10897f80-97f5-4f6d-b56b-8cbb7d365403 a ies:LocationObservation ;
-    ies:isPartOf data:1996e24c-e692-45de-ae0e-8b8d957c9426 .
+data:5989d5e2-d418-4095-8861-5446caa24700 a ies:LocationObservation ;
+    ies:inPeriod iso8601:2007-01-01T00:00:09 ;
+    ies:isPartOf data:02dc7f41-2714-40ce-85fd-3bae07a979c9 .
 
-data:4c91ba3b-8dd8-45ed-a31a-75af2c1d86d8 a ies:LocationObservation ;
-    ies:isPartOf data:1996e24c-e692-45de-ae0e-8b8d957c9426 .
+data:7eb8c5bd-9da6-4dfb-aba7-023b5ed5eb8c a ies:LocationObservation ;
+    ies:inPeriod iso8601:2007-01-01T00:04:55 ;
+    ies:isPartOf data:02dc7f41-2714-40ce-85fd-3bae07a979c9 .
 
-data:54685d47-418a-40ef-a2d6-f605abd17fef a ies:LocationObservation ;
-    ies:isPartOf data:1996e24c-e692-45de-ae0e-8b8d957c9426 .
+data:82d3c656-9879-4069-b22a-accf8f7ba18a a ies:LocationObservation ;
+    ies:inPeriod iso8601:2007-01-01T00:03:38 ;
+    ies:isPartOf data:02dc7f41-2714-40ce-85fd-3bae07a979c9 .
 
-data:55e19a1b-3c5f-45d9-9723-328cd40d462d a ies:LocationObservation ;
-    ies:isPartOf data:1996e24c-e692-45de-ae0e-8b8d957c9426 .
+data:ae8b160c-7da3-4393-9f8a-2a6fe60d24c5 a ies:LocationObservation ;
+    ies:inPeriod iso8601:2007-01-01T00:07:56 ;
+    ies:isPartOf data:02dc7f41-2714-40ce-85fd-3bae07a979c9 .
 
-data:5bbf17ac-7692-40b5-b463-3a88fc6c7c79 a ies:LocationObservation ;
-    ies:isPartOf data:1996e24c-e692-45de-ae0e-8b8d957c9426 .
+data:d6282065-830b-4205-a8b7-ad4784608bf8 a ies:LocationObservation ;
+    ies:inPeriod iso8601:2007-01-01T00:05:40 ;
+    ies:isPartOf data:02dc7f41-2714-40ce-85fd-3bae07a979c9 .
 
-data:dac5db37-806c-4c9d-9e22-5371cd2f65df a ies:LocationObservation ;
-    ies:isPartOf data:1996e24c-e692-45de-ae0e-8b8d957c9426 .
+data:e3fbc3af-d11c-4fa7-b46f-8494f130036c a ies:LocationObservation ;
+    ies:inPeriod iso8601:2007-01-01T00:04:39 ;
+    ies:isPartOf data:02dc7f41-2714-40ce-85fd-3bae07a979c9 .
 
-data:dc63d588-9d45-487f-95ca-5ba8a3ff6136 a ies:LocationObservation ;
-    ies:isPartOf data:1996e24c-e692-45de-ae0e-8b8d957c9426 .
+data:ea3e1691-a995-4d84-97df-e9569677fe80 a ies:LocationObservation ;
+    ies:inPeriod iso8601:2007-01-01T00:01:57 ;
+    ies:isPartOf data:02dc7f41-2714-40ce-85fd-3bae07a979c9 .
 
-data:fa83f7f8-bfed-4f12-a785-3fe97025477b a ies:LocationObservation ;
-    ies:isPartOf data:1996e24c-e692-45de-ae0e-8b8d957c9426 .
+data:f47f0c95-02a7-477e-8dfb-fb140f0d6651 a ies:LocationObservation ;
+    ies:inPeriod iso8601:2007-01-01T00:06:50 ;
+    ies:isPartOf data:02dc7f41-2714-40ce-85fd-3bae07a979c9 .
 
-data:fafd6ff4-fe2f-4041-9997-e29be1ae3854 a ies:LocationObservation ;
-    ies:isPartOf data:1996e24c-e692-45de-ae0e-8b8d957c9426 .
+data:fa9dda23-5dbf-422e-9a64-033f969ef6ca a ies:LocationObservation ;
+    ies:inPeriod iso8601:2007-01-01T00:02:29 ;
+    ies:isPartOf data:02dc7f41-2714-40ce-85fd-3bae07a979c9 .
 
 data:geohash_dr5r4qwg7tpv a ies:GeoPoint ;
     ies:isIdentifiedBy data:geohash_dr5r4qwg7tpv_lat,
@@ -202,5 +236,5 @@ data:MMSI_367000150 a ies:LocationTransponder ;
 data:MMSI_366952890 a ies:LocationTransponder ;
     ies:isIdentifiedBy data:MMSI_366952890_idObj .
 
-data:1996e24c-e692-45de-ae0e-8b8d957c9426 a ies:Observation .
+data:02dc7f41-2714-40ce-85fd-3bae07a979c9 a ies:Observation .
 

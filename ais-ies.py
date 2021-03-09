@@ -1,5 +1,8 @@
+#!/usr/bin/python3
 #LICENSE = GPL3 (Gnu Public License v3)
-#Produced under contract to Dstl 
+#Produced under contract to Dstl
+# additional python packages needed
+# pip install rdflib geohash pytrhon-geohash python-dateutil
 
 from rdflib import Graph, plugin, URIRef, BNode, Literal
 from rdflib.namespace import DC, DCAT, DCTERMS, OWL, RDF, RDFS, XMLNS, XSD
@@ -253,17 +256,25 @@ for aisLine in ais:
         if newTime > latestTimeStamp:
             latestTimeStamp = newTime
     createLocationObservation(iesGraph=graph,mmsi=aisLine[0],timestamp=aisLine[1],lat=aisLine[2],lon=aisLine[3],obs=obs)
+
+saveRdf(graph,'data/track-from-ais.ies.ttl')
+
 print("earliest:",earliestTimeStamp.isoformat())
 print("latest",latestTimeStamp.isoformat())
 #Now we use the earliest and latest to timebox the observation itself
 startsIn(iesGraph=graph,item=obs,iso8601TimeString=earliestTimeStamp.isoformat())
 endsIn(iesGraph=graph,item=obs,iso8601TimeString=latestTimeStamp.isoformat())
 
+graphAssessment = Graph()
+graphAssessment.namespace_manager.bind('ies', iesUri)
+graphAssessment.namespace_manager.bind('iso8601', iso8601Uri)
+graphAssessment.namespace_manager.bind('data', dataUri)
+addNamingSchemes(graphAssessment)
 #Now say one is following the other (they're not, but I didn't have any data where ships followed each other)
 #First we create an object for the system that detected it. 
-hal = instantiate(iesGraph=graph,_class=system)
-addName(iesGraph=graph,item=hal,nameString="HAL")
+hal = instantiate(iesGraph=graphAssessment,_class=system)
+addName(iesGraph=graphAssessment,item=hal,nameString="HAL")
 #now create the following pattern, with our system included as the assessor
-following(iesGraph=graph,followerMMSI="367000150",followedMMSI="366952890",startTimeStamp="2007-01-01T00:00:09",endTimeStamp="2007-01-01T00:05:40",inferenceSystem=hal)
+following(iesGraph=graphAssessment,followerMMSI="367000150",followedMMSI="366952890",startTimeStamp="2007-01-01T00:00:09",endTimeStamp="2007-01-01T00:05:40",inferenceSystem=hal)
 
-saveRdf(graph,'output.ies.ttl')
+saveRdf(graphAssessment,'output.ies.ttl')
