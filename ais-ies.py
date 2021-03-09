@@ -78,6 +78,7 @@ def generateDataUri():
 
 #Check to see if a triple is already in our graph
 def inGraph(iesGraph,subject,predicate,obj):
+    print("SPO",subject,predicate,obj)
     return (subject, predicate, obj) in iesGraph
 
 #We use this function to check if we've already got this triple in the graph before creating it - rdflib should deal with this, but we've had a few issues, and this also helps a bit with performance
@@ -234,10 +235,10 @@ graph.namespace_manager.bind('iso8601', iso8601Uri)
 graph.namespace_manager.bind('data', dataUri)
 addNamingSchemes(graph)
 #Add a parent observation
-#obs = createTrack(graph) #comment this line out to prevent a track being created
+obs = createTrack(graph) #comment this line out to prevent a track being created
 #run the positions data through
-#for aisLine in ais:
- #   createLocationObservation(aisLine[0],aisLine[1],aisLine[2],aisLine[3],obs,graph)
+for aisLine in ais:
+    createLocationObservation(graph,aisLine[0],aisLine[1],aisLine[2],aisLine[3],obs)
 
 #Now say one is following the other (they're not, but I didn't have any data where ships followed each other)
 #First we create an object for the system that detected it. 
