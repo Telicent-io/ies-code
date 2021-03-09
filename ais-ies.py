@@ -74,7 +74,7 @@ ass = URIRef(iesUri+"assessed")
 
 
 
-mmsiNs = URIRef(ituUri+"#mmsi-NamingScheme") #Make a URI for the MMSI naming schema from the ITU's URI 
+mmsiNs = URIRef(ituUri+"#mmsi-NamingScheme") #Make a URI for the MMSI naming schema from the ITU's URI
 
 #this kinda speaks for itself. Creates a random (UUID) URI based on the dataUri stub
 def generateDataUri():
@@ -156,7 +156,7 @@ def createLocationTransponder(iesGraph,mmsi):
 #Simple function to process a line of AIS in IES. It expects mmsi, timestamp (in ISO8601 format), lat, lon
 def createLocationObservation(iesGraph,mmsi,timestamp,lat,lon,obs=None):
     print(mmsi,timestamp)
-    #add the location transponder - We don't know this is necessarily a vessel. All we know is that we have a LocationTransponder. 
+    #add the location transponder - We don't know this is necessarily a vessel. All we know is that we have a LocationTransponder.
     lt = createLocationTransponder(iesGraph=iesGraph,mmsi=mmsi)
     #Now create the observation event
     lo = instantiate(iesGraph=iesGraph,_class=locationObservation)
@@ -196,7 +196,7 @@ def createTrack(iesGraph):
 
 def saveRdf(graph,filename):
     graph.serialize(destination=filename, format='ttl')
-    graph.remove((None, None, None)) #Clear the graph 
+    graph.remove((None, None, None)) #Clear the graph
 
 def createSystem(iesGraph,sysName):
     sys = instantiate(iesGraph=iesGraph,_class=system)
@@ -257,13 +257,14 @@ for aisLine in ais:
             latestTimeStamp = newTime
     createLocationObservation(iesGraph=graph,mmsi=aisLine[0],timestamp=aisLine[1],lat=aisLine[2],lon=aisLine[3],obs=obs)
 
-saveRdf(graph,'data/track-from-ais.ies.ttl')
-
 print("earliest:",earliestTimeStamp.isoformat())
 print("latest",latestTimeStamp.isoformat())
 #Now we use the earliest and latest to timebox the observation itself
 startsIn(iesGraph=graph,item=obs,iso8601TimeString=earliestTimeStamp.isoformat())
 endsIn(iesGraph=graph,item=obs,iso8601TimeString=latestTimeStamp.isoformat())
+# save graph WITH the proper observation timebox
+saveRdf(graph,'data/track-from-ais.ies.ttl')
+
 
 graphAssessment = Graph()
 graphAssessment.namespace_manager.bind('ies', iesUri)
@@ -271,7 +272,7 @@ graphAssessment.namespace_manager.bind('iso8601', iso8601Uri)
 graphAssessment.namespace_manager.bind('data', dataUri)
 addNamingSchemes(graphAssessment)
 #Now say one is following the other (they're not, but I didn't have any data where ships followed each other)
-#First we create an object for the system that detected it. 
+#First we create an object for the system that detected it.
 hal = instantiate(iesGraph=graphAssessment,_class=system)
 addName(iesGraph=graphAssessment,item=hal,nameString="HAL")
 #now create the following pattern, with our system included as the assessor
