@@ -234,10 +234,10 @@ graph.namespace_manager.bind('iso8601', iso8601Uri)
 graph.namespace_manager.bind('data', dataUri)
 addNamingSchemes(graph)
 #Add a parent observation
-#obs = createTrack(graph) #comment this line out to prevent a track being created
+obs = createTrack(graph) #comment this line out to prevent a track being created
 #run the positions data through
-#for aisLine in ais:
- #   createLocationObservation(aisLine[0],aisLine[1],aisLine[2],aisLine[3],obs,graph)
+for aisLine in ais:
+    createLocationObservation(graph,aisLine[0],aisLine[1],aisLine[2],aisLine[3],obs)
 
 #Now say one is following the other (they're not, but I didn't have any data where ships followed each other)
 #First we create an object for the system that detected it. 
