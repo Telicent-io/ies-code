@@ -13,14 +13,11 @@ import Geohash   # (pip install Geohash but also pip install python-geohash )
 ais=[
     ["366952890","2007-01-01T00:00:09",40.64175,-74.07136],
     ["366952890","2007-01-01T00:01:20",40.64175,-74.07135],
-    ["367000150","2007-01-01T00:01:57",40.64196,-74.07289],
     ["366952890","2007-01-01T00:02:29",40.64176,-74.07136],
     ["366952890","2007-01-01T00:03:38",40.64176,-74.07138],
     ["366952890","2007-01-01T00:04:39",40.64176,-74.07138],
-    ["367000150","2007-01-01T00:04:55",40.64197,-74.07291],
     ["366952890","2007-01-01T00:05:40",40.64175,-74.07136],
     ["366952890","2007-01-01T00:06:50",40.64175,-74.07135],
-    ["367000150","2007-01-01T00:07:56",40.64196,-74.07291]
 ]
 
 #The URI namespaces we're going to be using
@@ -73,6 +70,20 @@ ass = URIRef(iesUri+"assessed")
 
 mmsiNs = URIRef(ituUri+"#mmsi-NamingScheme") #Make a URI for the MMSI naming schema from the ITU's URI 
 
+#delete all triples in the graph
+def clearGraph(iesGraph):
+    iesGraph.remove((None, None, None))
+
+#clears the graph and adds all the boilerplate stuff
+def initialiseGraph(iesGraph):
+    clearGraph(iesGraph=iesGraph)
+    iesGraph.namespace_manager.bind('ies', iesUri)
+    iesGraph.namespace_manager.bind('iso8601', iso8601Uri)
+    iesGraph.namespace_manager.bind('data', dataUri)
+    addNamingSchemes(iesGraph=iesGraph)
+    return iesGraph
+
+
 #this kinda speaks for itself. Creates a random (UUID) URI based on the dataUri stub
 def generateDataUri():
     return(URIRef(dataUri+str(uuid.uuid4())))
@@ -120,7 +131,7 @@ def addName(iesGraph,item,nameString,nameType=None,namingScheme=None):
     addToGraph(iesGraph=iesGraph,subject=myName,predicate=rv,obj=Literal(nameString, datatype=XSD.string))
     addToGraph(iesGraph=iesGraph,subject=item,predicate=hn,obj=myName)
     if namingScheme:
-        addToGraph(iesGraph=esGraph,subject=myName,predicate=ins,obj=namingScheme)
+        addToGraph(iesGraph=iesGraph,subject=myName,predicate=ins,obj=namingScheme)
     return myName
 
 #add boilerplate stuff
@@ -227,12 +238,10 @@ def following(iesGraph,followerMMSI, followedMMSI, startTimeStamp, endTimeStamp,
         putInPeriod(iesGraph=iesGraph,item=assessment,iso8601TimeString="2007-01-02T09:17:04")
 
 
+
 #set up the RDF graph
 graph = Graph()
-graph.namespace_manager.bind('ies', iesUri)
-graph.namespace_manager.bind('iso8601', iso8601Uri)
-graph.namespace_manager.bind('data', dataUri)
-addNamingSchemes(graph)
+initialiseGraph(graph)
 #Add a parent observation
 obs = createTrack(graph) #comment this line out to prevent a track being created
 #run the positions data through
@@ -259,6 +268,11 @@ print("latest",latestTimeStamp.isoformat())
 startsIn(iesGraph=graph,item=obs,iso8601TimeString=earliestTimeStamp.isoformat())
 endsIn(iesGraph=graph,item=obs,iso8601TimeString=latestTimeStamp.isoformat())
 
+saveRdf(graph,'track.ies.ttl')
+
+#erase and re-initialise the graph - comment this out if you want the additional data to go into the same graph.
+initialiseGraph(graph)
+
 #Now say one is following the other (they're not, but I didn't have any data where ships followed each other)
 #First we create an object for the system that detected it. 
 hal = instantiate(iesGraph=graph,_class=system)
@@ -266,4 +280,4 @@ addName(iesGraph=graph,item=hal,nameString="HAL")
 #now create the following pattern, with our system included as the assessor
 following(iesGraph=graph,followerMMSI="367000150",followedMMSI="366952890",startTimeStamp="2007-01-01T00:00:09",endTimeStamp="2007-01-01T00:05:40",inferenceSystem=hal)
 
-saveRdf(graph,'output.ies.ttl')
+saveRdf(graph,'following.ies.ttl')
