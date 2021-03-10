@@ -2,6 +2,10 @@ from rdflib import Graph, plugin, URIRef, BNode, Literal
 from rdflib.namespace import DC, DCAT, DCTERMS, OWL, RDF, RDFS, XMLNS, XSD
 from rdflib.serializer import Serializer
 import uuid
+import dateutil.parser
+from kafka import KafkaConsumer, KafkaProducer
+import zlib
+
 
 
 #The URI namespaces we're going to be using
@@ -56,6 +60,21 @@ och = URIRef(iesUri+"observedCharacteristic")
 
 mmsiNs = URIRef(ituUri+"#mmsi-NamingScheme") #Make a URI for the MMSI naming schema from the ITU's URI 
 
+#delete all triples in the graph
+def clearGraph(iesGraph):
+    iesGraph.remove((None, None, None))
+
+#clears the graph and adds all the boilerplate stuff
+def initialiseGraph(iesGraph):
+    if iesGraph is None:
+        iesGraph = Graph()
+    clearGraph(iesGraph=iesGraph)
+    iesGraph.namespace_manager.bind('ies', iesUri)
+    iesGraph.namespace_manager.bind('iso8601', iso8601Uri)
+    iesGraph.namespace_manager.bind('data', dataUri)
+    addNamingSchemes(iesGraph=iesGraph)
+    return iesGraph
+
 #this kinda speaks for itself. Creates a random (UUID) URI based on the dataUri stub
 def generateDataUri():
     return(URIRef(dataUri+str(uuid.uuid4())))
@@ -78,23 +97,24 @@ def instantiate(iesGraph,_class,instance=None):
     return(instance)
 
 #Puts an item in a particular period
-def putInPeriod(iesGraph,item,iso8601TimeString):
+def putInPeriod(iesGraph,item,timeString):
+    iso8601TimeString = dateutil.parser.parse(timeString).isoformat()
     pp = URIRef(iso8601Uri+str(iso8601TimeString)) #The time is encoded in the URI so we can resolve on unique periods - this code assumes ISO8601 formatted timestamp...standards dear boy, standards !
     instantiate(iesGraph=iesGraph,_class=particularPeriod,instance=pp)
     addToGraph(iesGraph=iesGraph,subject=item,predicate=ip,obj=pp)
     return pp
 
 #Asserts an item started in a particular period
-def startsIn(iesGraph,item,iso8601TimeString):
+def startsIn(iesGraph,item,timeString):
     bs = instantiate(iesGraph=iesGraph,_class=boundingState)
     addToGraph(iesGraph=iesGraph,subject=bs,predicate=iso,obj=item)
-    putInPeriod(iesGraph=iesGraph,item=bs,iso8601TimeString=iso8601TimeString)
+    putInPeriod(iesGraph=iesGraph,item=bs,timeString=timeString)
 
 #Asserts an item ended in a particular period
-def endsIn(iesGraph,item,iso8601TimeString):
+def endsIn(iesGraph,item,timeString):
     bs = instantiate(iesGraph=iesGraph,_class=boundingState)
     addToGraph(iesGraph=iesGraph,subject=bs,predicate=ieo,obj=item)
-    putInPeriod(iesGraph=iesGraph,item=bs,iso8601TimeString=iso8601TimeString)
+    putInPeriod(iesGraph=iesGraph,item=bs,timeString=timeString)
 
 #Add a name to an itme, and optionally specify a particular type of name( from IES Model) and a naming scheme (of your own creation)
 def addName(iesGraph,item,nameString,nameType=None,namingScheme=None):
@@ -140,17 +160,16 @@ def createSystem(iesGraph,sysName):
     sys = instantiate(iesGraph=iesGraph,_class=system)
 
 
-
-def initialiseGraph():
-    #set up the RDF graph
-    graph = Graph()
-    graph.namespace_manager.bind('ies', iesUri)
-    graph.namespace_manager.bind('iso8601', iso8601Uri)
-    graph.namespace_manager.bind('data', dataUri)
-    addNamingSchemes(graph)
-    return(graph)
-
 def saveRdf(graph,filename):
     graph.serialize(destination=filename, format='ttl')
     graph.remove((None, None, None)) #Clear the graph 
 
+
+def initialiseKafka(kHost):
+    return KafkaProducer(bootstrap_servers=[kHost])
+
+def sendToKafka(iesGraph,kProducer,kTopic):
+    NT = iesGraph.serialize(format='nt', indent=4).decode()
+    binNT = bytes(NT,"utf-8")
+    zipNT = zlib.compress(binNT)
+    kProducer.send(kTopic, value=zipNT)
