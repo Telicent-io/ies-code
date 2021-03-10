@@ -92,12 +92,14 @@ def processDatabase(dbFileName,delay,batchSize):
             trackDict[mmsi] = {"id":mmsi,"pings":[row],"minDateTime":dt,"maxDateTime":dt}
 
 
+#Set up the rdf graph
+graph=ies.initialiseGraph()
+
 processDatabase(dbFileName=aisDB,delay=pingDelay,batchSize=trackSize)
 quit()
 
 
-#Set up the rdf graph
-graph=ies.initialiseGraph()
+
 
 #Load the raw AIS data
 #The messages are arrays of AIS fields:
