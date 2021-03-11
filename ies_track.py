@@ -18,7 +18,7 @@ sampleSize=20 #The total number of pings to process
 trackSize=4 #The number of location pings to accrue before pushing out a track
 
 #Set this to True to use Kafka
-useKafka = True
+useKafka = False
 
 if useKafka:
     iesOutput = "kafka"
@@ -85,7 +85,7 @@ def exportTrack(iesGraph,track,output="file"):
     ies.addToGraph(iesGraph=iesGraph,subject=obsvd,predicate=ies.ipi,obj=obs)
     #now go through the individual location observations and add those...
     for ping in track["pings"]:
-        createLocationObservation(iesGraph=iesGraph,ping=ping,transponder=lt) 
+        createLocationObservation(iesGraph=iesGraph,ping=ping,transponder=lt,obs=obs) 
     if output == "kafka":
         ies.sendToKafka(iesGraph=iesGraph,kProducer=kafkaBroker,kTopic=iesKafkaTopic)
     else:
