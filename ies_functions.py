@@ -124,13 +124,14 @@ def addName(iesGraph,item,nameString,nameType=None,namingScheme=None):
     addToGraph(iesGraph=iesGraph,subject=myName,predicate=rv,obj=Literal(nameString, datatype=XSD.string))
     addToGraph(iesGraph=iesGraph,subject=item,predicate=hn,obj=myName)
     if namingScheme:
-        addToGraph(iesGraph=esGraph,subject=myName,predicate=ins,obj=namingScheme)
+        addToGraph(iesGraph=iesGraph,subject=myName,predicate=ins,obj=namingScheme)
     return myName
 
 #add boilerplate stuff
 def addNamingSchemes(iesGraph):
     #Boiler plate stuff - creating the NamingScheme for mmsi:
     addToGraph(iesGraph=iesGraph,subject=mmsiNs, predicate=RDF.type, obj=namingScheme)#Note that RDF lib prefers to be given URIRefs...it will also work with strings but we hit some snags and now always force a URIRef for subject predicate and object
+    addName(iesGraph=iesGraph,item=mmsiNs,nameString="MMSI",namingScheme=mmsiNs) #Hoisted by its own petard...or at least named by its own naming scheme
     #congrats, you just created your first IES triple. Woop Woop.
     #Now let's make the ITU the owner of the namingScheme
     instantiate(iesGraph=iesGraph, _class=organisation,instance=URIRef(ituUri))
