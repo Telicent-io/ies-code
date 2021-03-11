@@ -40,6 +40,10 @@ assessor = URIRef(iesUri+"Assessor")
 name = URIRef(iesUri+"Name")
 #New stuff, not yet approved !
 classOfMeasure = URIRef(iesUri+"ClassOfMeasure")
+measurement = URIRef(iesUri+"Measurement")
+unitOfMeasure = URIRef(iesUri+"UnitOfMeasure")
+measure = URIRef(iesUri+"Measure")
+measureValue = URIRef(iesUri+"MeasureValue")
 
 #Now the IES predicates (properties / relationships) we'll be using
 ipo = URIRef(iesUri+"isParticipationOf")
@@ -57,6 +61,7 @@ ieo = URIRef(iesUri+"isEndOf")
 ass = URIRef(iesUri+"assessed")
 #New stuff, not yet approved !
 och = URIRef(iesUri+"observedCharacteristic")
+mu = URIRef(iesUri+"measureUnit")
 
 mmsiNs = URIRef(ituUri+"#mmsi-NamingScheme") #Make a URI for the MMSI naming schema from the ITU's URI 
 

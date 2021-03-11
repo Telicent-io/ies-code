@@ -29,7 +29,7 @@ else:
 
 
 #Simple function to process a line of AIS in IES. It expects mmsi, timestamp (in ISO8601 format), lat, lon
-def createLocationObservation(iesGraph,ping,obs=None,transponder=None):
+def createLocationObservation(iesGraph,ping,obs=None,transponder=None,measures=None):
     mmsi = str(ping[0])
     timestamp = str(ping[1])
     lat = float(ping[2])
@@ -64,6 +64,12 @@ def createLocationObservation(iesGraph,ping,obs=None,transponder=None):
     gpPart = ies.instantiate(iesGraph=iesGraph,_class=ies.observedLocation)
     ies.addToGraph(iesGraph=iesGraph,subject=gpPart,predicate=ies.ipo,obj=gp) #participation of the GeoPoint
     ies.addToGraph(iesGraph=iesGraph,subject=gpPart,predicate=ies.ipi,obj=lo) #participation in the LocationObservation
+    if measures:
+        sogVal = float(ping[4])
+        cogVal = float(ping[5])
+        sog = ies.instantiate(iesGraph=iesGraph,_class=ies.measure)
+
+
 
 
 #A simple parent observation to group the others into track
@@ -72,12 +78,21 @@ def createParentObservation(iesGraph):
 
 def exportTrack(iesGraph,track,output="file"):
     #The track dictionary should already have min and max timestamps for the pings it contains
-    print(track["id"],track["minDateTime"],track["maxDateTime"],len(track["pings"]))
     ies.initialiseGraph(iesGraph=iesGraph)
     #Add a parent observation
     obs = ies.instantiate(iesGraph=iesGraph,_class=ies.observation)
     ies.startsIn(iesGraph=iesGraph,item=obs,timeString=track["minDateTime"].isoformat())
     ies.endsIn(iesGraph=iesGraph,item=obs,timeString=track["maxDateTime"].isoformat())
+    measures = dict({})
+    #Now add the measure classes for Speed Over Ground and Course Over Ground...and knots for the Unit Of Measure
+    measures["sogClass"] = ies.instantiate(iesGraph=iesGraph,_class=ies.classOfMeasure,instance=URIRef(ies.dataUri+"SpeedOverGround"))
+    measures["cogClass"] = ies.instantiate(iesGraph=iesGraph,_class=ies.classOfMeasure,instance=URIRef(ies.dataUri+"CourseOverGround"))
+    measures["knots"] = ies.instantiate(iesGraph=iesGraph,_class=ies.unitOfMeasure,instance=URIRef(ies.dataUri+"Knots"))
+    measures["degTN"] = ies.instantiate(iesGraph=iesGraph,_class=ies.unitOfMeasure,instance=URIRef(ies.dataUri+"DegreesTrueNorth"))
+    ies.addName(iesGraph=iesGraph,item=measures["sogClass"],nameString="Speed Over Ground")
+    ies.addName(iesGraph=iesGraph,item=measures["cogClass"],nameString="Course Over Ground")
+    ies.addName(iesGraph=iesGraph,item=measures["knots"],nameString="knots")
+    ies.addName(iesGraph=iesGraph,item=measures["degTN"],nameString="degrees true North")
     #add the location transponder - We don't know this is necessarily a vessel. All we know is that we have a LocationTransponder. 
     lt = ies.createLocationTransponder(iesGraph=iesGraph,mmsi=track["id"])
     obsvd = ies.instantiate(iesGraph=iesGraph,_class=ies.observedTarget)
@@ -85,7 +100,7 @@ def exportTrack(iesGraph,track,output="file"):
     ies.addToGraph(iesGraph=iesGraph,subject=obsvd,predicate=ies.ipi,obj=obs)
     #now go through the individual location observations and add those...
     for ping in track["pings"]:
-        createLocationObservation(iesGraph=iesGraph,ping=ping,transponder=lt,obs=obs) 
+        createLocationObservation(iesGraph=iesGraph,ping=ping,transponder=lt,obs=obs,measures=measures) 
     if output == "kafka":
         ies.sendToKafka(iesGraph=iesGraph,kProducer=kafkaBroker,kTopic=iesKafkaTopic)
     else:
