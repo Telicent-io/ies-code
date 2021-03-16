@@ -59,9 +59,11 @@ isoP = URIRef(iesUri+"iso8601PeriodRepresentation")
 iso = URIRef(iesUri+"isStartOf")
 ieo = URIRef(iesUri+"isEndOf")
 ass = URIRef(iesUri+"assessed")
+hv = URIRef(iesUri+"hasValue")
+mu = URIRef(iesUri+"measureUnit")
 #New stuff, not yet approved !
 och = URIRef(iesUri+"observedCharacteristic")
-mu = URIRef(iesUri+"measureUnit")
+mc = URIRef(iesUri+"measureClass")
 
 mmsiNs = URIRef(ituUri+"#mmsi-NamingScheme") #Make a URI for the MMSI naming schema from the ITU's URI 
 
@@ -131,6 +133,17 @@ def addName(iesGraph,item,nameString,nameType=None,namingScheme=None):
     if namingScheme:
         addToGraph(iesGraph=iesGraph,subject=myName,predicate=ins,obj=namingScheme)
     return myName
+
+def addMeasure(iesGraph,measureClass,value,uom):
+    meas = instantiate(iesGraph=iesGraph,_class=measure)
+    addToGraph(iesGraph=iesGraph,subject=meas,predicate=mc,obj=measureClass)
+    measureVal = instantiate(iesGraph=iesGraph,_class=measureValue)
+    addToGraph(iesGraph=iesGraph,subject=measureVal,predicate=rv,obj=Literal(value, datatype=XSD.string))
+    addToGraph(iesGraph=iesGraph,subject=meas,predicate=hv,obj=measureVal)
+    addToGraph(iesGraph=iesGraph,subject=measureVal,predicate=mu,obj=uom)
+    return(meas)
+
+
 
 #add boilerplate stuff
 def addNamingSchemes(iesGraph):
