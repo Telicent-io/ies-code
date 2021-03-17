@@ -1,6 +1,6 @@
 # ies-code
 
-Simple repo of shareable (GPL) IES code for getting started with IES. We'll put more of these up over time.
+This is the original Python script posted to the repo to get folks started. It is not maintained. Refer to the scripts in the top folder for the latest work. 
 
 Code samples are:
 
