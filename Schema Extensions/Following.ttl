@@ -1,0 +1,18 @@
+@prefix 			ies: 		<http://ies.data.gov.uk/ontology/ies4#> .
+@prefix 			rdf: 		<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix 			rdfs: 		<http://www.w3.org/2000/01/rdf-schema#> .
+
+ies:Follow	 	        rdf:type 		    rdfs:Class .
+ies:Follow	 	        rdfs:subClassOf 	ies:Event .
+ies:Followed	 	    rdf:type 		    rdfs:Class .
+ies:Followed	 	    rdfs:subClassOf 	ies:EventParticipant .
+ies:Follower	 	    rdf:type 		    rdfs:Class .
+ies:Follower	 	    rdfs:subClassOf 	ies:EventParticipant .
+ies:ActiveFollower	 	rdf:type 		    rdfs:Class .
+ies:ActiveFollower 	 	rdfs:subClassOf 	ies:Follower .
+ies:ActiveFollower 	 	rdfs:subClassOf 	ies:ActiveEventParticipant .
+
+
+
+
+

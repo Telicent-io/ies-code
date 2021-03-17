@@ -1,0 +1,23 @@
+@prefix 				ies: 		<http://ies.data.gov.uk/ontology/ies4#> .
+@prefix 				rdf: 		<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix 				rdfs: 		<http://www.w3.org/2000/01/rdf-schema#> .
+@prefix 				owl: 		<http://www.w3.org/2002/07/owl#> .
+
+ies:ClassOfCharacteristic       rdf:type                rdfs:Class .
+ies:ClassOfCharacteristic       rdfs:subClassOf         ies:ClassOfClassOfElement .
+ies:ClassOfCharacteristic       ies:powertype           ies:Characteristic .
+ies:ClassOfMeasure              rdf:type                rdfs:Class .
+ies:ClassOfMeasure              rdfs:subClassOf         ies:ClassOfCharacteristic .
+ies:ClassOfMeasure              ries:powertype          ies:Measure .
+
+ies:characteristicClass	 		rdf:type 	    	    owl:ObjectProperty .
+ies:characteristicClass         rdfs:subPropertyOf      rdf:type .
+ies:characteristicClass         rdfs:subPropertyOf      ies:relationship .
+ies:characteristicClass         rdfs:domain             ies:Characteristic . 
+ies:characteristicClass         rdfs:range              ies:ClassOfCharacteristic . 
+
+ies:measureClass	 			rdf:type 	    	    owl:ObjectProperty .
+ies:measureClass                rdfs:subPropertyOf      ies:characteristicClass .
+ies:measureClass                rdfs:domain             ies:Measure . 
+ies:measureClass                rdfs:range              ies:ClassOfMeasure . 
+
