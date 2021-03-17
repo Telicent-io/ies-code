@@ -1,0 +1,69 @@
+@prefix data: <http://ais.data.gov.uk/ais-ies-test#> .
+@prefix ies: <http://ies.data.gov.uk/ontology/ies4#> .
+@prefix iso8601: <http://iso.org/iso8601#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+data:397e44e3-8079-47b8-ace4-2f209570c5ac a ies:BoundingState ;
+    ies:inPeriod iso8601:2007-01-01T00:05:40 ;
+    ies:isEndOf data:317a9467-e793-49c6-afc8-1f7620da9317 .
+
+data:604c54b5-83b4-4bef-bb0e-8b3d65c7105b a ies:Followed ;
+    ies:isParticipantIn data:317a9467-e793-49c6-afc8-1f7620da9317 ;
+    ies:isParticipationOf data:MMSI_366952890 .
+
+data:8320b90e-1be1-43a9-b2be-098b8d1af71b a ies:BoundingState ;
+    ies:inPeriod iso8601:2007-01-01T00:00:09 ;
+    ies:isStartOf data:317a9467-e793-49c6-afc8-1f7620da9317 .
+
+data:a29182d3-3e6f-4938-87b0-b8d2623091f1 a ies:Assessor ;
+    ies:isParticipantIn data:e861aeac-5de6-4a7e-b014-84fcd09b09ca ;
+    ies:isParticipationOf data:1b11840b-c95d-439b-a428-e154341d419b .
+
+data:f37486e5-e3ee-4629-af2f-18b06cbf864e a ies:Follower ;
+    ies:isParticipantIn data:317a9467-e793-49c6-afc8-1f7620da9317 ;
+    ies:isParticipationOf data:MMSI_367000150 .
+
+data:1b11840b-c95d-439b-a428-e154341d419b a ies:System ;
+    ies:hasName data:5a4b2c7b-4477-44e2-b8fd-ae749e3a70b8 .
+
+data:5a4b2c7b-4477-44e2-b8fd-ae749e3a70b8 a ies:Name ;
+    ies:representationValue "HAL"^^xsd:string .
+
+data:983b30bd-220f-4924-8225-157ddc280861 a ies:Name ;
+    ies:representationValue "International Telecommunications Union"^^xsd:string .
+
+data:MMSI_366952890 a ies:LocationTransponder ;
+    ies:isIdentifiedBy data:MMSI_366952890_idObj .
+
+data:MMSI_366952890_idObj a ies:CommunicationsIdentifier ;
+    ies:inScheme <http://itu.int#mmsi-NamingScheme> ;
+    ies:representationValue "366952890"^^xsd:string .
+
+data:MMSI_367000150 a ies:LocationTransponder ;
+    ies:isIdentifiedBy data:MMSI_367000150_idObj .
+
+data:MMSI_367000150_idObj a ies:CommunicationsIdentifier ;
+    ies:inScheme <http://itu.int#mmsi-NamingScheme> ;
+    ies:representationValue "367000150"^^xsd:string .
+
+data:e861aeac-5de6-4a7e-b014-84fcd09b09ca a ies:Assess ;
+    ies:assessed data:67c522ac-baee-48fd-b322-3f4ef03c39af ;
+    ies:inPeriod iso8601:2007-01-02T09:17:04 .
+
+iso8601:2007-01-01T00:00:09 a ies:ParticularPeriod .
+
+iso8601:2007-01-01T00:05:40 a ies:ParticularPeriod .
+
+iso8601:2007-01-02T09:17:04 a ies:ParticularPeriod .
+
+<http://itu.int> a ies:Organisation ;
+    ies:hasName data:983b30bd-220f-4924-8225-157ddc280861 .
+
+data:67c522ac-baee-48fd-b322-3f4ef03c39af a ies:PossibleWorld .
+
+<http://itu.int#mmsi-NamingScheme> a ies:NamingScheme ;
+    ies:schemeOwner <http://itu.int> .
+
+data:317a9467-e793-49c6-afc8-1f7620da9317 a ies:Follow ;
+    ies:isPartOf data:67c522ac-baee-48fd-b322-3f4ef03c39af .
+
