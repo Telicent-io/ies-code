@@ -1,0 +1,232 @@
+@prefix data: <http://ais.data.gov.uk/ais-ies-test#> .
+@prefix ies: <http://ies.data.gov.uk/ontology/ies4#> .
+@prefix iso8601: <http://iso.org/iso8601#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+data:25d54ba1-8c4d-4705-b0fd-6fbf8c171031 a ies:ObservedLocation ;
+    ies:isParticipantIn data:936b98b2-9d34-412c-b3aa-db115286ec34 ;
+    ies:isParticipationOf data:geohash_dr5r4qwgk9my .
+
+data:4eeef36a-120c-4cb7-a473-d0411dffeec9 a ies:ObservedTarget ;
+    ies:isParticipantIn data:01fcb569-e397-46b3-ac87-39a23dde7d86 ;
+    ies:isParticipationOf data:MMSI_366952890 ;
+    ies:observedCharacteristic data:39b016c7-d67c-46c4-a7bc-620d6ff20bee,
+        data:e879545d-306c-410f-b580-d0477f1b8ea6 .
+
+data:69b49d4d-a6a2-47e6-b79e-0a3622ad841b a ies:ObservedTarget ;
+    ies:isParticipantIn data:3972f98e-e19b-4155-a538-dcca124840db ;
+    ies:isParticipationOf data:MMSI_366952890 ;
+    ies:observedCharacteristic data:a29d9ab5-7358-44ba-a533-87e22e0c0ea7,
+        data:d1019f7e-d0ac-4bb0-9310-0b95f50fd108 .
+
+data:75a2f78a-6228-4dde-8015-5eb144f7af6b a ies:ObservedTarget ;
+    ies:isParticipantIn data:3b4b9c87-7cd2-47e7-b9e8-6b9444b23dd4 ;
+    ies:isParticipationOf data:MMSI_366952890 .
+
+data:ace5591e-eb08-48d6-8b6c-9870cb9047f5 a ies:ObservedLocation ;
+    ies:isParticipantIn data:01fcb569-e397-46b3-ac87-39a23dde7d86 ;
+    ies:isParticipationOf data:geohash_dr5r4qwgkjnv .
+
+data:b4e1d67a-3a1e-43fb-a807-f232c17b0c32 a ies:BoundingState ;
+    ies:inPeriod iso8601:2017-01-01T00:09:10 ;
+    ies:isStartOf data:3b4b9c87-7cd2-47e7-b9e8-6b9444b23dd4 .
+
+data:c3679779-2723-4ef3-afb6-0813d2e7b624 a ies:ObservedLocation ;
+    ies:isParticipantIn data:8ee422a6-7fb4-4551-86ad-7a6c937aca59 ;
+    ies:isParticipationOf data:geohash_dr5r4qwgkgm4 .
+
+data:cef35d5b-0c06-46ca-a048-b2c292e31c09 a ies:ObservedTarget ;
+    ies:isParticipantIn data:936b98b2-9d34-412c-b3aa-db115286ec34 ;
+    ies:isParticipationOf data:MMSI_366952890 ;
+    ies:observedCharacteristic data:e26d5cf4-408d-4146-a1cd-926ad2c7e0fe,
+        data:ecab593c-3e01-4ba5-9c43-372d40a04f95 .
+
+data:e7caf23a-33e3-4979-a27a-364db17942c1 a ies:BoundingState ;
+    ies:inPeriod iso8601:2017-01-01T00:12:40 ;
+    ies:isEndOf data:3b4b9c87-7cd2-47e7-b9e8-6b9444b23dd4 .
+
+data:f31be3a5-acc0-49f5-81c1-e96030065d54 a ies:ObservedTarget ;
+    ies:isParticipantIn data:8ee422a6-7fb4-4551-86ad-7a6c937aca59 ;
+    ies:isParticipationOf data:MMSI_366952890 ;
+    ies:observedCharacteristic data:4880525c-73fd-403c-9fae-532b7198202f,
+        data:819acdae-1ca1-4981-9a48-0c628843f948 .
+
+data:f42e5488-f6ff-445d-8b9a-fb4e5dd02f4c a ies:ObservedLocation ;
+    ies:isParticipantIn data:3972f98e-e19b-4155-a538-dcca124840db ;
+    ies:isParticipationOf data:geohash_dr5r4qwg7gr6 .
+
+data:09d4d56d-4bbd-43b4-80e1-5c740d8b4066 a ies:MeasureValue ;
+    ies:measureUnit data:Knots ;
+    ies:representationValue "0.0"^^xsd:string .
+
+data:0e9ed5d4-a978-48c5-82a3-846f1a8af6ca a ies:MeasureValue ;
+    ies:measureUnit data:DegreesTrueNorth ;
+    ies:representationValue "0.0"^^xsd:string .
+
+data:215271e2-44b5-40d4-8178-65d17d9995b5 a ies:MeasureValue ;
+    ies:measureUnit data:Knots ;
+    ies:representationValue "0.0"^^xsd:string .
+
+data:39b016c7-d67c-46c4-a7bc-620d6ff20bee a ies:Measure ;
+    ies:hasValue data:d52681a0-18d5-4cd0-b2e6-6ebd33888f77 ;
+    ies:measureClass data:SpeedOverGround .
+
+data:45962485-ccd4-4edb-97dd-2349975e410f a ies:Name ;
+    ies:representationValue "International Telecommunications Union"^^xsd:string .
+
+data:4880525c-73fd-403c-9fae-532b7198202f a ies:Measure ;
+    ies:hasValue data:8ebe1ef1-15a7-4ffb-adb1-022e728c2c5f ;
+    ies:measureClass data:CourseOverGround .
+
+data:50bcd6f9-47ef-4687-83fc-cd84dd2fa2f2 a ies:Name ;
+    ies:representationValue "knots"^^xsd:string .
+
+data:5c5dd1d5-9e7d-4634-a1b0-71f8f0d2f4d7 a ies:MeasureValue ;
+    ies:measureUnit data:Knots ;
+    ies:representationValue "0.0"^^xsd:string .
+
+data:5eb63e4d-6fd1-4545-b5b6-5a959c364ed1 a ies:Name ;
+    ies:representationValue "degrees true North"^^xsd:string .
+
+data:819acdae-1ca1-4981-9a48-0c628843f948 a ies:Measure ;
+    ies:hasValue data:09d4d56d-4bbd-43b4-80e1-5c740d8b4066 ;
+    ies:measureClass data:SpeedOverGround .
+
+data:8ebe1ef1-15a7-4ffb-adb1-022e728c2c5f a ies:MeasureValue ;
+    ies:measureUnit data:DegreesTrueNorth ;
+    ies:representationValue "0.0"^^xsd:string .
+
+data:MMSI_366952890_idObj a ies:CommunicationsIdentifier ;
+    ies:inScheme <http://itu.int#mmsi-NamingScheme> ;
+    ies:representationValue "366952890"^^xsd:string .
+
+data:a29d9ab5-7358-44ba-a533-87e22e0c0ea7 a ies:Measure ;
+    ies:hasValue data:0e9ed5d4-a978-48c5-82a3-846f1a8af6ca ;
+    ies:measureClass data:CourseOverGround .
+
+data:b6772be5-bcf0-406e-9c52-16bab0b313c3 a ies:Name ;
+    ies:representationValue "Speed Over Ground"^^xsd:string .
+
+data:b947e0cc-5225-414b-a1a8-ef5a9d83353b a ies:MeasureValue ;
+    ies:measureUnit data:DegreesTrueNorth ;
+    ies:representationValue "0.0"^^xsd:string .
+
+data:d1019f7e-d0ac-4bb0-9310-0b95f50fd108 a ies:Measure ;
+    ies:hasValue data:5c5dd1d5-9e7d-4634-a1b0-71f8f0d2f4d7 ;
+    ies:measureClass data:SpeedOverGround .
+
+data:d52681a0-18d5-4cd0-b2e6-6ebd33888f77 a ies:MeasureValue ;
+    ies:measureUnit data:Knots ;
+    ies:representationValue "0.0"^^xsd:string .
+
+data:e26d5cf4-408d-4146-a1cd-926ad2c7e0fe a ies:Measure ;
+    ies:hasValue data:e426b6db-731d-48d3-956c-27b1517fadb4 ;
+    ies:measureClass data:CourseOverGround .
+
+data:e426b6db-731d-48d3-956c-27b1517fadb4 a ies:MeasureValue ;
+    ies:measureUnit data:DegreesTrueNorth ;
+    ies:representationValue "0.0"^^xsd:string .
+
+data:e82a61ea-5d06-4025-9c24-7c07ef55cbc9 a ies:Name ;
+    ies:inScheme <http://itu.int#mmsi-NamingScheme> ;
+    ies:representationValue "MMSI"^^xsd:string .
+
+data:e879545d-306c-410f-b580-d0477f1b8ea6 a ies:Measure ;
+    ies:hasValue data:b947e0cc-5225-414b-a1a8-ef5a9d83353b ;
+    ies:measureClass data:CourseOverGround .
+
+data:ecab593c-3e01-4ba5-9c43-372d40a04f95 a ies:Measure ;
+    ies:hasValue data:215271e2-44b5-40d4-8178-65d17d9995b5 ;
+    ies:measureClass data:SpeedOverGround .
+
+data:fa0aea93-e1cc-417f-b850-8100b567dd02 a ies:Name ;
+    ies:representationValue "Course Over Ground"^^xsd:string .
+
+data:geohash_dr5r4qwg7gr6 a ies:GeoPoint ;
+    ies:isIdentifiedBy data:geohash_dr5r4qwg7gr6_lat,
+        data:geohash_dr5r4qwg7gr6_lon .
+
+data:geohash_dr5r4qwg7gr6_lat a ies:Latitude ;
+    ies:representationValue "40.64175"^^xsd:string .
+
+data:geohash_dr5r4qwg7gr6_lon a ies:Longitude ;
+    ies:representationValue "-74.07137"^^xsd:string .
+
+data:geohash_dr5r4qwgk9my a ies:GeoPoint ;
+    ies:isIdentifiedBy data:geohash_dr5r4qwgk9my_lat,
+        data:geohash_dr5r4qwgk9my_lon .
+
+data:geohash_dr5r4qwgk9my_lat a ies:Latitude ;
+    ies:representationValue "40.64174"^^xsd:string .
+
+data:geohash_dr5r4qwgk9my_lon a ies:Longitude ;
+    ies:representationValue "-74.07134"^^xsd:string .
+
+data:geohash_dr5r4qwgkgm4 a ies:GeoPoint ;
+    ies:isIdentifiedBy data:geohash_dr5r4qwgkgm4_lat,
+        data:geohash_dr5r4qwgkgm4_lon .
+
+data:geohash_dr5r4qwgkgm4_lat a ies:Latitude ;
+    ies:representationValue "40.64175"^^xsd:string .
+
+data:geohash_dr5r4qwgkgm4_lon a ies:Longitude ;
+    ies:representationValue "-74.07133"^^xsd:string .
+
+data:geohash_dr5r4qwgkjnv a ies:GeoPoint ;
+    ies:isIdentifiedBy data:geohash_dr5r4qwgkjnv_lat,
+        data:geohash_dr5r4qwgkjnv_lon .
+
+data:geohash_dr5r4qwgkjnv_lat a ies:Latitude ;
+    ies:representationValue "40.64176"^^xsd:string .
+
+data:geohash_dr5r4qwgkjnv_lon a ies:Longitude ;
+    ies:representationValue "-74.07136"^^xsd:string .
+
+iso8601:2017-01-01T00:10:19 a ies:ParticularPeriod .
+
+iso8601:2017-01-01T00:11:29 a ies:ParticularPeriod .
+
+<http://itu.int> a ies:Organisation ;
+    ies:hasName data:45962485-ccd4-4edb-97dd-2349975e410f .
+
+data:01fcb569-e397-46b3-ac87-39a23dde7d86 a ies:LocationObservation ;
+    ies:inPeriod iso8601:2017-01-01T00:11:29 ;
+    ies:isPartOf data:3b4b9c87-7cd2-47e7-b9e8-6b9444b23dd4 .
+
+data:3972f98e-e19b-4155-a538-dcca124840db a ies:LocationObservation ;
+    ies:inPeriod iso8601:2017-01-01T00:10:19 ;
+    ies:isPartOf data:3b4b9c87-7cd2-47e7-b9e8-6b9444b23dd4 .
+
+data:8ee422a6-7fb4-4551-86ad-7a6c937aca59 a ies:LocationObservation ;
+    ies:inPeriod iso8601:2017-01-01T00:12:40 ;
+    ies:isPartOf data:3b4b9c87-7cd2-47e7-b9e8-6b9444b23dd4 .
+
+data:936b98b2-9d34-412c-b3aa-db115286ec34 a ies:LocationObservation ;
+    ies:inPeriod iso8601:2017-01-01T00:09:10 ;
+    ies:isPartOf data:3b4b9c87-7cd2-47e7-b9e8-6b9444b23dd4 .
+
+iso8601:2017-01-01T00:09:10 a ies:ParticularPeriod .
+
+iso8601:2017-01-01T00:12:40 a ies:ParticularPeriod .
+
+<http://itu.int#mmsi-NamingScheme> a ies:NamingScheme ;
+    ies:hasName data:e82a61ea-5d06-4025-9c24-7c07ef55cbc9 ;
+    ies:schemeOwner <http://itu.int> .
+
+data:CourseOverGround a ies:ClassOfMeasure ;
+    ies:hasName data:fa0aea93-e1cc-417f-b850-8100b567dd02 .
+
+data:DegreesTrueNorth a ies:UnitOfMeasure ;
+    ies:hasName data:5eb63e4d-6fd1-4545-b5b6-5a959c364ed1 .
+
+data:Knots a ies:UnitOfMeasure ;
+    ies:hasName data:50bcd6f9-47ef-4687-83fc-cd84dd2fa2f2 .
+
+data:SpeedOverGround a ies:ClassOfMeasure ;
+    ies:hasName data:b6772be5-bcf0-406e-9c52-16bab0b313c3 .
+
+data:MMSI_366952890 a ies:LocationTransponder ;
+    ies:isIdentifiedBy data:MMSI_366952890_idObj .
+
+data:3b4b9c87-7cd2-47e7-b9e8-6b9444b23dd4 a ies:Observation .
+

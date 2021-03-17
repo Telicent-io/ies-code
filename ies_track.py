@@ -106,7 +106,7 @@ def exportTrack(iesGraph,track,output="file"):
     if output == "kafka":
         ies.sendToKafka(iesGraph=iesGraph,kProducer=kafkaBroker,kTopic=iesKafkaTopic)
     else:
-        ies.saveRdf(iesGraph,'track'+track["id"]+'-'+str(track["counter"])+'.ies.ttl')
+        ies.saveRdf(iesGraph,'./data/track'+track["id"]+'-'+str(track["counter"])+'.ies.ttl')
 
 #This runs through a sqlite3 database of IES data (see download instructions at start of this file) and creates tracks
 #If output is set to "file" they're exported as turtle files, indexed by track number and mmsi

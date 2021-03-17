@@ -33,9 +33,6 @@ MANIFEST
 *.manifest
 *.spec
 
-#prevent db files
-*.db
-
 # Installer logs
 pip-log.txt
 pip-delete-this-directory.txt
