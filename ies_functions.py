@@ -107,6 +107,7 @@ def instantiate(iesGraph,_class,instance=None):
 def putInPeriod(iesGraph,item,timeString):
     iso8601TimeString = dateutil.parser.parse(timeString).isoformat()
     pp = URIRef(iso8601Uri+str(iso8601TimeString)) #The time is encoded in the URI so we can resolve on unique periods - this code assumes ISO8601 formatted timestamp...standards dear boy, standards !
+    addToGraph(iesGraph=iesGraph,subject=pp,predicate=isoP,obj=Literal(str(iso8601TimeString), datatype=XSD.string))
     instantiate(iesGraph=iesGraph,_class=particularPeriod,instance=pp)
     addToGraph(iesGraph=iesGraph,subject=item,predicate=ip,obj=pp)
     return pp
@@ -134,6 +135,7 @@ def addName(iesGraph,item,nameString,nameType=None,namingScheme=None):
         addToGraph(iesGraph=iesGraph,subject=myName,predicate=ins,obj=namingScheme)
     return myName
 
+#addMeasure - creates a measure that's an instance of a given measureClass, adds its value and unit of measure
 def addMeasure(iesGraph,measureClass,value,uom):
     meas = instantiate(iesGraph=iesGraph,_class=measure)
     addToGraph(iesGraph=iesGraph,subject=meas,predicate=mc,obj=measureClass)
