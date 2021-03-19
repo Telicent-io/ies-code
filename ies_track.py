@@ -18,7 +18,7 @@ sampleSize=20 #The total number of pings to process
 trackSize=4 #The number of location pings to accrue before pushing out a track
 
 #Set this to True to use Kafka
-useKafka = False
+useKafka = True
 
 if useKafka:
     iesOutput = "kafka"

@@ -190,7 +190,10 @@ def initialiseKafka(kHost):
     return KafkaProducer(bootstrap_servers=[kHost])
 
 def sendToKafka(iesGraph,kProducer,kTopic):
-    NT = iesGraph.serialize(format='nt', indent=4).decode()
-    binNT = bytes(NT,"utf-8")
-    zipNT = zlib.compress(binNT)
-    kProducer.send(kTopic, value=zipNT)
+    #NT = iesGraph.serialize(format='nt', indent=4).decode()
+    #binNT = bytes(NT,"utf-8")
+    #zipNT = zlib.compress(binNT)
+    #kProducer.send(kTopic, value=zipNT)
+    ttl = iesGraph.serialize(format='ttl', indent=4).decode()
+    binTTL = bytes(ttl,"utf-8")
+    kProducer.send(kTopic, value=binTTL)
