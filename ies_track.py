@@ -6,7 +6,6 @@ from rdflib.namespace import DC, DCAT, DCTERMS, OWL, RDF, RDFS, XMLNS, XSD
 from rdflib.serializer import Serializer
 import uuid
 import dateutil.parser #required to do earliest, latest date time comparison
-import Geohash   # (pip install Geohash but also pip install python-geohash )
 import ies_functions as ies
 import sqlite3
 from time import sleep
@@ -18,7 +17,7 @@ sampleSize=20 #The total number of pings to process
 trackSize=4 #The number of location pings to accrue before pushing out a track
 
 #Set this to True to use Kafka
-useKafka = True
+useKafka = False
 
 if useKafka:
     iesOutput = "kafka"
@@ -48,7 +47,7 @@ def createLocationObservation(iesGraph,ping,obs=None,transponder=None,measures=N
     ies.addToGraph(iesGraph=iesGraph,subject=ltPart,predicate=ies.ipo,obj=transponder) #participation of the transponder
     ies.addToGraph(iesGraph=iesGraph,subject=ltPart,predicate=ies.ipi,obj=lo) #participation in the LocationObservation
     #Now the observed location, a geopoint with a lat and long - using a geohash to give each point a unique uri
-    gp = URIRef(ies.dataUri+"geohash_"+Geohash.encode(lat,lon))
+    gp = URIRef(ies.dataUri+"latlong"+str(lat)+","+str(lon))
     ies.instantiate(iesGraph=iesGraph,_class=ies.geoPoint,instance=gp)
     #Add the lat and long values as identifiers of the geopoint...firstly creating repeatable URIs for them so they don't overwrite
     latObj = URIRef(gp.toPython()+"_lat")
