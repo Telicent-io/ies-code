@@ -8,7 +8,7 @@ ies:ClassOfCharacteristic       rdfs:subClassOf         ies:ClassOfClassOfElemen
 ies:ClassOfCharacteristic       ies:powertype           ies:Characteristic .
 ies:ClassOfMeasure              rdf:type                rdfs:Class .
 ies:ClassOfMeasure              rdfs:subClassOf         ies:ClassOfCharacteristic .
-ies:ClassOfMeasure              ries:powertype          ies:Measure .
+ies:ClassOfMeasure              ies:powertype          ies:Measure .
 
 ies:characteristicClass	 		rdf:type 	    	    owl:ObjectProperty .
 ies:characteristicClass         rdfs:subPropertyOf      rdf:type .

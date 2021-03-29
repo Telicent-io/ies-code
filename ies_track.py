@@ -9,6 +9,7 @@ import dateutil.parser #required to do earliest, latest date time comparison
 import ies_functions as ies
 import sqlite3
 from time import sleep
+import geohash_hilbert as ghh
 
 aisDataFile="./2ferries4weeks.csv"
 aisDB="../GeoData/nyc.db" #This file can be downloaded from https://ais-sqlite-db.s3.eu-west-2.amazonaws.com/nyc.db - change your path as necessary
