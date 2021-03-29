@@ -68,7 +68,7 @@ def createLocationObservation(iesGraph,ping,obs=None,transponder=None,measures=N
         sogVal = float(ping[4])
         cogVal = float(ping[5])
         sog = ies.addMeasure(iesGraph=iesGraph,measureClass=measures["sogClass"],value=sogVal,uom=measures["knots"])
-        cog = ies.addMeasure(iesGraph=iesGraph,measureClass=measures["cogClass"],value=sogVal,uom=measures["degTN"])
+        cog = ies.addMeasure(iesGraph=iesGraph,measureClass=measures["cogClass"],value=cogVal,uom=measures["degTN"])
         ies.addToGraph(iesGraph=iesGraph,subject=ltPart,predicate=ies.och,obj=sog)
         ies.addToGraph(iesGraph=iesGraph,subject=ltPart,predicate=ies.och,obj=cog)
 
