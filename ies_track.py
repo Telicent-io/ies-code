@@ -64,6 +64,7 @@ def createLocationObservation(iesGraph,ping,obs=None,transponder=None,measures=N
     gpPart = ies.instantiate(iesGraph=iesGraph,_class=ies.observedLocation)
     ies.addToGraph(iesGraph=iesGraph,subject=gpPart,predicate=ies.ipo,obj=gp) #participation of the GeoPoint
     ies.addToGraph(iesGraph=iesGraph,subject=gpPart,predicate=ies.ipi,obj=lo) #participation in the LocationObservation
+    #This code fires if the measure classes etc. have been provided - it takes the speed and course over ground and processes that. 
     if measures:
         sogVal = float(ping[4])
         cogVal = float(ping[5])
