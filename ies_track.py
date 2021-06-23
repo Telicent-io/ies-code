@@ -28,8 +28,12 @@ else:
     iesOutput = "file"
 
 
+
+
+
 #Simple function to process a line of AIS in IES. It expects mmsi, timestamp (in ISO8601 format), lat, lon
-def createLocationObservation(iesGraph,ping,obs=None,transponder=None,measures=None):
+#If EPSG code is set, it expects 4 parameters instead of lat and lon. In most cases, only the first two parameters will be set
+def createLocationObservation(iesGraph,ping,obs=None,transponder=None,measures=None,epsgCode=None):
     mmsi = str(ping[0])
     timestamp = str(ping[1])
     lat = float(ping[2])
@@ -48,18 +52,22 @@ def createLocationObservation(iesGraph,ping,obs=None,transponder=None,measures=N
     ies.addToGraph(iesGraph=iesGraph,subject=ltPart,predicate=ies.ipo,obj=transponder) #participation of the transponder
     ies.addToGraph(iesGraph=iesGraph,subject=ltPart,predicate=ies.ipi,obj=lo) #participation in the LocationObservation
     #Now the observed location, a geopoint with a lat and long - using a geohash to give each point a unique uri
-    gp = URIRef(ies.dataUri+"latlong"+str(lat)+","+str(lon))
-    ies.instantiate(iesGraph=iesGraph,_class=ies.geoPoint,instance=gp)
-    #Add the lat and long values as identifiers of the geopoint...firstly creating repeatable URIs for them so they don't overwrite
-    latObj = URIRef(gp.toPython()+"_lat")
-    lonObj = URIRef(gp.toPython()+"_lon")
-    ies.instantiate(iesGraph=iesGraph, _class=ies.latitude,instance=latObj)
-    ies.instantiate(iesGraph=iesGraph, _class=ies.longitude,instance=lonObj)
-    ies.addToGraph(iesGraph=iesGraph,subject=gp,predicate=ies.iib,obj=latObj)
-    ies.addToGraph(iesGraph=iesGraph,subject=gp,predicate=ies.iib,obj=lonObj)
-    #Add the representation values to the lat and lon objects
-    ies.addToGraph(iesGraph=iesGraph,subject=latObj,predicate=ies.rv,obj=Literal(lat, datatype=XSD.string))
-    ies.addToGraph(iesGraph=iesGraph,subject=lonObj,predicate=ies.rv,obj=Literal(lon, datatype=XSD.string))
+
+    if epsgCode == None:  #No epsg, therefore assume this is WGS84 Lat Long
+        gp = URIRef(ies.dataUri+"latlong"+str(lat)+","+str(lon))
+        ies.instantiate(iesGraph=iesGraph,_class=ies.geoPoint,instance=gp)
+        #Add the lat and long values as identifiers of the geopoint...firstly creating repeatable URIs for them so they don't overwrite
+        latObj = URIRef(gp.toPython()+"_lat")
+        lonObj = URIRef(gp.toPython()+"_lon")
+        ies.instantiate(iesGraph=iesGraph, _class=ies.latitude,instance=latObj)
+        ies.instantiate(iesGraph=iesGraph, _class=ies.longitude,instance=lonObj)
+        ies.addToGraph(iesGraph=iesGraph,subject=gp,predicate=ies.iib,obj=latObj)
+        ies.addToGraph(iesGraph=iesGraph,subject=gp,predicate=ies.iib,obj=lonObj)
+        #Add the representation values to the lat and lon objects
+        ies.addToGraph(iesGraph=iesGraph,subject=latObj,predicate=ies.rv,obj=Literal(lat, datatype=XSD.string))
+        ies.addToGraph(iesGraph=iesGraph,subject=lonObj,predicate=ies.rv,obj=Literal(lon, datatype=XSD.string))
+    else:
+        
     #Now the participation of the GeoPoint in the Observation
     gpPart = ies.instantiate(iesGraph=iesGraph,_class=ies.observedLocation)
     ies.addToGraph(iesGraph=iesGraph,subject=gpPart,predicate=ies.ipo,obj=gp) #participation of the GeoPoint
