@@ -1,0 +1,223 @@
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    src: url('/assets/open-sans-v15-latin/open-sans-v15-latin-regular.eot'); /* IE9 Compat Modes */
+    src: local('Open Sans Regular'), local('OpenSans-Regular'),
+         url('/assets/roboto/Roboto-Regular.ttf') format('truetype'), /* Safari, Android, iOS */
+  }
+
+  @font-face {
+    font-family: 'Roboto-Thin';
+    font-style: normal;
+    font-weight: 400;
+    src: url('/assets/open-sans-v15-latin/open-sans-v15-latin-regular.eot'); /* IE9 Compat Modes */
+    src: local('Open Sans Regular'), local('OpenSans-Regular'),
+         url('/assets/roboto/Roboto-Thin.ttf') format('truetype'), /* Safari, Android, iOS */
+  }
+  @font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://example.com/MaterialIcons-Regular.eot); /* For IE6-8 */
+    src: local('Material Icons'),
+      local('MaterialIcons-Regular'),
+      url('/assets/MaterialIcons-Regular.ttf') format('truetype');
+  }
+
+
+
+  .material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;  /* Preferred icon size */
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+  
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
+  
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+  
+    /* Support for IE. */
+    font-feature-settings: 'liga';
+  }
+
+
+
+
+html {
+    background-color: #222;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    color: whitesmoke;
+    background-color: rgb(17,17,17);
+    font-size: 1em;
+    padding-top:10px;
+    padding-left: 40px;
+    padding-right: 80px;
+}
+
+pre {
+    border: thin lightgrey solid;
+    color: lawngreen;
+    font-size: 0.5em;
+    overflowX: scroll
+}
+
+h4 {
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+#upload-new-file {
+    display:inline
+}
+
+.icon-button {
+    font-size: 1em;
+    color:whitesmoke;
+    cursor:pointer;
+    margin-right:15px;
+    margin-top:22px;
+}
+
+.icon-container {
+    display:inline;
+}
+
+.info-pane {
+    height:300px;
+}
+
+.progress-box {
+    height:260px;
+    padding:10px;
+    padding-left:15px;
+    font-size: 0.5vw;
+    color:whitesmoke;
+    overflow: auto;
+    display:block;
+}
+
+.modal {
+    width: 1200px,
+    background-color: red;
+}
+
+.red-bg {
+    background-color: red;
+}
+
+.logo-div {
+    padding-top: 0px;
+    text-align: left;
+}
+
+.blue-bg {
+    background-color: blue;
+}
+
+.pol-div {
+    height : 25%;
+}
+.map-controls {
+    padding-top: 10px;
+    padding-left:10px;
+    height : 100px;
+}
+
+.map-div {
+    height : 600px;
+}
+
+.geo-info {
+    padding-top:8px;
+    font-size:0.8em;
+    height :30px
+}
+
+.plot-100pc {
+    height : 100%;
+    width: 100%;
+}
+
+
+.telicent-header {
+    font-family: 'Roboto-thin', sans-serif;
+    font-size: 2em;
+    padding-left: 40px;
+    background-color: rgb(34,34,34);
+    color:limegreen;
+    height: 80px;
+    text-align: center;
+}
+
+.app-title {
+    padding-top:15px;
+    padding-left:-20px
+}
+
+.app-controls {
+    padding-top:0px;
+    padding-right:10px;
+    text-align: right;
+}
+
+.logo {
+    padding-top:-20px;
+}
+
+.upload {
+    visibility:hidden;
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    border-width: 1px;
+    border-style: dashed;
+
+    border-radius: 5px;
+    text-align: center;
+    margin: 10px
+}
+
+.add-butt {
+    font-size:1.4em;
+    color:limegreen;
+    cursor:pointer;
+    float:right;
+}
+
+.prop-title {
+    margin-bottom: 0px;
+    font-size: 0.65vw;
+    color: limegreen;
+}
+
+.prop-value {
+    font-size:0.8em;
+}
+
+.box {
+    background-color: rgb(34, 34, 34);
+    padding:5px;
+    padding-left: 10px;
+    margin-bottom:5px;
+    margin-top:5px;
+}
+
+.latlong-box {
+    background-color: rgb(90, 90, 90);
+    font-size: 0.65vw;
+}

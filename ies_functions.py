@@ -82,6 +82,26 @@ def initialiseGraph(iesGraph):
     addNamingSchemes(iesGraph=iesGraph)
     return iesGraph
 
+def getShortUri(graph,uri):
+    if type(uri) is URIRef:
+        id = uri
+    else:
+        id = URIRef(uri)
+    return id.n3(graph.namespace_manager)
+
+def parseJSONLD(iesGraph, rawJSON):
+    # assume it's compressed JSON-LD, so flatten it !
+    flattened = jsonld.flatten(rawJSON)
+    iesGraph.parse(data=json.dumps(flattened), format='json-ld')
+
+def parseN3(iesGraph, n3):
+    # assume it's compressed JSON-LD, so flatten it !
+    iesGraph.parse(data=n3, format='n3')
+
+def parseNT(iesGraph, nt):
+    # assume it's compressed JSON-LD, so flatten it !
+    iesGraph.parse(data=nt, format='nt')
+
 #this kinda speaks for itself. Creates a random (UUID) URI based on the dataUri stub
 def generateDataUri():
     return(URIRef(dataUri+str(uuid.uuid4())))
