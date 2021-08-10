@@ -18,7 +18,5 @@ iesGraph = ies.initialiseGraph()
 for track in tracks:
     print(track.metadata)
     iesss.exportStoneSoupTrack(iesGraph,track.id,track.states,measurement_model.mapping,targetId=track.metadata["MMSI"],epsgCode=32630)
-    ies.saveRdf(iesGraph,"./ss.ttl")
-    quit()
 
-print(iesGraph.serialize(format='ttl', indent=4).decode())
+ies.saveRdf(iesGraph,"./ss.ttl")
