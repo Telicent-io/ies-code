@@ -13,7 +13,6 @@ import zlib
 import urllib.parse
 from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
 import uuid
-
 import datetime
 import plotly.express as px
 import pandas as pd
@@ -24,11 +23,12 @@ currentdir = os.path.dirname(os.path.realpath(__file__))
 parentdir = os.path.dirname(currentdir)
 sys.path.append(parentdir)
 import ies_functions as ies
+#import dash_treeview_antd
 
 #This is a (relatively) simple app for monitoring RDF data moving through a KAFKA log. Because of the throughput of Kafka, this app works in three threads:
         #Thread one - watchKafka() - takes every message coming through the log and grabs summary data about it...but no calculations
         #Thread two - summariseData() - takes the data from thread one and carries out summarisation tasks, then stores the data ready for thread 3
-        #Thread three - updateCache() - periodically checks the summarised data and pushes to the client-side cache, the HTML components read it from there.
+        #Thread three - updateCache() - periodically checks the summ#arised data and pushes to the client-side cache, the HTML components read it from there.
 
 
 bright_colours = ['#009fff',  # neon blue
@@ -344,7 +344,9 @@ def make_layout():
             ]
             ),
             html.Div(id="spaedos",className="row",children=[
-                html.Div(id="left-of-gauges",className="col-md-3"),
+                html.Div(id="left-of-gauges",className="col-md-3",children=[
+
+                ]),
                 html.Div(id="gauges-col",className="col-md-9", children=[
                     html.Div(id="gauges",className="row",children= [
                         daq.Gauge(
@@ -370,7 +372,7 @@ def make_layout():
                 
             ])
 
-        ], className=""
+        ], className="", style={"backgroundColor":"rgb(17,17,17)"}
             
     )
 

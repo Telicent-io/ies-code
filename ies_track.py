@@ -30,10 +30,11 @@ else:
 
 
 
+#def createEpsgLocationObservation(iesGraph,observedEntity,coordinates,epsgCode,timestamp):
+
 
 #Simple function to process a line of AIS in IES. It expects mmsi, timestamp (in ISO8601 format), lat, lon
-#If EPSG code is set, it expects 4 parameters instead of lat and lon. In most cases, only the first two parameters will be set
-def createLocationObservation(iesGraph,ping,obs=None,transponder=None,measures=None,epsgCode=None):
+def createLocationObservation(iesGraph,ping,obs=None,transponder=None,measures=None):
     mmsi = str(ping[0])
     timestamp = str(ping[1])
     lat = float(ping[2])
@@ -53,20 +54,20 @@ def createLocationObservation(iesGraph,ping,obs=None,transponder=None,measures=N
     ies.addToGraph(iesGraph=iesGraph,subject=ltPart,predicate=ies.ipi,obj=lo) #participation in the LocationObservation
     #Now the observed location, a geopoint with a lat and long - using a geohash to give each point a unique uri
 
-    if epsgCode == None:  #No epsg, therefore assume this is WGS84 Lat Long
-        gp = URIRef(ies.dataUri+"latlong"+str(lat)+","+str(lon))
-        ies.instantiate(iesGraph=iesGraph,_class=ies.geoPoint,instance=gp)
-        #Add the lat and long values as identifiers of the geopoint...firstly creating repeatable URIs for them so they don't overwrite
-        latObj = URIRef(gp.toPython()+"_lat")
-        lonObj = URIRef(gp.toPython()+"_lon")
-        ies.instantiate(iesGraph=iesGraph, _class=ies.latitude,instance=latObj)
-        ies.instantiate(iesGraph=iesGraph, _class=ies.longitude,instance=lonObj)
-        ies.addToGraph(iesGraph=iesGraph,subject=gp,predicate=ies.iib,obj=latObj)
-        ies.addToGraph(iesGraph=iesGraph,subject=gp,predicate=ies.iib,obj=lonObj)
-        #Add the representation values to the lat and lon objects
-        ies.addToGraph(iesGraph=iesGraph,subject=latObj,predicate=ies.rv,obj=Literal(lat, datatype=XSD.string))
-        ies.addToGraph(iesGraph=iesGraph,subject=lonObj,predicate=ies.rv,obj=Literal(lon, datatype=XSD.string))
-    else:
+
+    gp = URIRef(ies.dataUri+"latlong"+str(lat)+","+str(lon))
+    ies.instantiate(iesGraph=iesGraph,_class=ies.geoPoint,instance=gp)
+    #Add the lat and long values as identifiers of the geopoint...firstly creating repeatable URIs for them so they don't overwrite
+    latObj = URIRef(gp.toPython()+"_lat")
+    lonObj = URIRef(gp.toPython()+"_lon")
+    ies.instantiate(iesGraph=iesGraph, _class=ies.latitude,instance=latObj)
+    ies.instantiate(iesGraph=iesGraph, _class=ies.longitude,instance=lonObj)
+    ies.addToGraph(iesGraph=iesGraph,subject=gp,predicate=ies.iib,obj=latObj)
+    ies.addToGraph(iesGraph=iesGraph,subject=gp,predicate=ies.iib,obj=lonObj)
+    #Add the representation values to the lat and lon objects
+    ies.addToGraph(iesGraph=iesGraph,subject=latObj,predicate=ies.rv,obj=Literal(lat, datatype=XSD.string))
+    ies.addToGraph(iesGraph=iesGraph,subject=lonObj,predicate=ies.rv,obj=Literal(lon, datatype=XSD.string))
+
         
     #Now the participation of the GeoPoint in the Observation
     gpPart = ies.instantiate(iesGraph=iesGraph,_class=ies.observedLocation)
@@ -87,7 +88,7 @@ def createLocationObservation(iesGraph,ping,obs=None,transponder=None,measures=N
 def createParentObservation(iesGraph):
     return ies.instantiate(iesGraph=iesGraph,_class=ies.observation)
 
-def exportTrack(iesGraph,track,output="file"):
+def exportTrack(iesGraph,track,output="file", epsgCode = "4326"):
     #The track dictionary should already have min and max timestamps for the pings it contains
     ies.initialiseGraph(iesGraph=iesGraph)
     #Add a parent observation
@@ -116,6 +117,8 @@ def exportTrack(iesGraph,track,output="file"):
         ies.sendToKafka(iesGraph=iesGraph,kProducer=kafkaBroker,kTopic=iesKafkaTopic)
     else:
         ies.saveRdf(iesGraph,'./data/track'+track["id"]+'-'+str(track["counter"])+'.ies.ttl')
+
+
 
 #This runs through a sqlite3 database of IES data (see download instructions at start of this file) and creates tracks
 #If output is set to "file" they're exported as turtle files, indexed by track number and mmsi

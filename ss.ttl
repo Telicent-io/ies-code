@@ -1,0 +1,176 @@
+@prefix data: <http://ais.data.gov.uk/ais-ies-test#> .
+@prefix ies: <http://ies.data.gov.uk/ontology/ies4#> .
+@prefix iso8601: <http://iso.org/iso8601#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://stonesoup.dstl.gov.uk/0cacda4d-2635-4d1f-9e7d-7b950ac32522> a ies:EpsgParameter2 ;
+    ies:inRepresentation <http://stonesoup.dstl.gov.uk/bf452287-679c-423b-80fd-04ac2ca75211> ;
+    ies:representationValue "5637271.300320299" .
+
+<http://stonesoup.dstl.gov.uk/12ca1620-f743-435e-8d73-48f0fe64e0c2> a ies:BoundingState ;
+    ies:inPeriod iso8601:2016-01-12T14:27:11.218000 ;
+    ies:isEndOf <http://stonesoup.dstl.gov.uk/bb26c992-3b00-4f5b-8497-556ae48a4099> .
+
+<http://stonesoup.dstl.gov.uk/140e57d5-d20a-48ee-a641-bc17e94153ab> a ies:ObservedLocation ;
+    ies:isParticipantIn <http://stonesoup.dstl.gov.uk/5bad84d9-229e-425e-bc51-10e6b6fbda9c> ;
+    ies:isParticipationOf <http://stonesoup.dstl.gov.uk/4fa4300c-698e-4e40-9eed-6d640d539da1> .
+
+<http://stonesoup.dstl.gov.uk/148b8d48-3b60-4b56-b936-80e20f3fc0af> a ies:BoundingState ;
+    ies:inPeriod iso8601:2016-01-12T14:22:49.881000 ;
+    ies:isStartOf <http://stonesoup.dstl.gov.uk/bb26c992-3b00-4f5b-8497-556ae48a4099> .
+
+<http://stonesoup.dstl.gov.uk/1837550f-dc17-4d6f-be8c-934f1aa9a7a5> a ies:EpsgParameter1 ;
+    ies:inRepresentation <http://stonesoup.dstl.gov.uk/272dccc5-b32a-4b5a-af6b-a2a356e50fc8> ;
+    ies:representationValue "613552.5275004548" .
+
+<http://stonesoup.dstl.gov.uk/1b77477f-c526-4744-a1d0-b2e389378bb7> a ies:ObservedLocation ;
+    ies:isParticipantIn <http://stonesoup.dstl.gov.uk/8636f3e2-7ac1-4c4f-8a54-36117e0856bd> ;
+    ies:isParticipationOf <http://stonesoup.dstl.gov.uk/d818da4f-675b-48b5-a9b1-c449ab4eccd9> .
+
+<http://stonesoup.dstl.gov.uk/1ef58843-a2fc-44a4-85e5-6a921b341e89> a ies:ObservedLocation ;
+    ies:isParticipantIn <http://stonesoup.dstl.gov.uk/67b8c423-02e3-439e-a53d-2fa21358edb2> ;
+    ies:isParticipationOf <http://stonesoup.dstl.gov.uk/51c67e2c-2f2f-487d-8fa5-2f86f5db4dc3> .
+
+<http://stonesoup.dstl.gov.uk/28e014a5-7655-480a-b842-8222e32ea6f7> a ies:ObservedLocation ;
+    ies:isParticipantIn <http://stonesoup.dstl.gov.uk/16c83fa4-2d1a-4100-84d4-3b9a086aa442> ;
+    ies:isParticipationOf <http://stonesoup.dstl.gov.uk/19391ff7-6a3a-4abf-8efb-428c53410977> .
+
+<http://stonesoup.dstl.gov.uk/2fa2c179-a992-46f4-abe1-b08fd329abe9> a ies:EpsgParameter2 ;
+    ies:inRepresentation <http://stonesoup.dstl.gov.uk/7e19abee-3efa-4391-958e-8ca75f796b2b> ;
+    ies:representationValue "5637271.300320299" .
+
+<http://stonesoup.dstl.gov.uk/2fe7fadd-6a1c-4450-9421-205197441500> a ies:ObservedLocation ;
+    ies:isParticipantIn <http://stonesoup.dstl.gov.uk/bdf6e2f5-3365-49af-ba7e-a7a2953fd690> ;
+    ies:isParticipationOf <http://stonesoup.dstl.gov.uk/80c93719-7274-4416-874c-4536c6194a78> .
+
+<http://stonesoup.dstl.gov.uk/44ddc745-f73a-4625-97ca-15c9b1faa9f7> a ies:EpsgParameter1 ;
+    ies:inRepresentation <http://stonesoup.dstl.gov.uk/7e19abee-3efa-4391-958e-8ca75f796b2b> ;
+    ies:representationValue "613552.5275004548" .
+
+<http://stonesoup.dstl.gov.uk/4ab017ba-7459-404c-a76b-36d406cf998e> a ies:ObservedTarget ;
+    ies:isParticipantIn <http://stonesoup.dstl.gov.uk/bdf6e2f5-3365-49af-ba7e-a7a2953fd690> ;
+    ies:isParticipationOf <http://stonesoup.dstl.gov.uk/_MMSI_235006680> .
+
+<http://stonesoup.dstl.gov.uk/4f1251d5-529e-40db-88ea-d1ff86cf1914> a ies:ObservedTarget ;
+    ies:isParticipantIn <http://stonesoup.dstl.gov.uk/67b8c423-02e3-439e-a53d-2fa21358edb2> ;
+    ies:isParticipationOf <http://stonesoup.dstl.gov.uk/_MMSI_235006680> .
+
+<http://stonesoup.dstl.gov.uk/58174ad7-7abc-47a8-9608-06e0872b5c71> a ies:ObservedTarget ;
+    ies:isParticipantIn <http://stonesoup.dstl.gov.uk/5bad84d9-229e-425e-bc51-10e6b6fbda9c> ;
+    ies:isParticipationOf <http://stonesoup.dstl.gov.uk/_MMSI_235006680> .
+
+<http://stonesoup.dstl.gov.uk/5e9c7d6e-84df-4f09-adcf-c8d9a83522c8> a ies:EpsgParameter1 ;
+    ies:inRepresentation <http://stonesoup.dstl.gov.uk/bf452287-679c-423b-80fd-04ac2ca75211> ;
+    ies:representationValue "613552.5275004548" .
+
+<http://stonesoup.dstl.gov.uk/75660707-8b96-4aba-b3b2-7599f43567cc> a ies:EpsgParameter2 ;
+    ies:inRepresentation <http://stonesoup.dstl.gov.uk/272dccc5-b32a-4b5a-af6b-a2a356e50fc8> ;
+    ies:representationValue "5637271.300320299" .
+
+<http://stonesoup.dstl.gov.uk/7ca64e49-4e8f-4fc1-88ac-fbde78eed531> a ies:ObservedTarget ;
+    ies:isParticipantIn <http://stonesoup.dstl.gov.uk/16c83fa4-2d1a-4100-84d4-3b9a086aa442> ;
+    ies:isParticipationOf <http://stonesoup.dstl.gov.uk/_MMSI_235006680> .
+
+<http://stonesoup.dstl.gov.uk/992f10f4-2430-4978-9e21-7ae4debd26f5> a ies:EpsgParameter2 ;
+    ies:inRepresentation <http://stonesoup.dstl.gov.uk/985c4d41-76fe-4531-8631-5472ac1d4447> ;
+    ies:representationValue "5637271.300320299" .
+
+<http://stonesoup.dstl.gov.uk/adc4dc86-28c6-4169-a37b-903af0e77224> a ies:ObservedTarget ;
+    ies:isParticipantIn <http://stonesoup.dstl.gov.uk/8636f3e2-7ac1-4c4f-8a54-36117e0856bd> ;
+    ies:isParticipationOf <http://stonesoup.dstl.gov.uk/_MMSI_235006680> .
+
+<http://stonesoup.dstl.gov.uk/b68a6220-edd0-46bd-9ee4-062fc81539b1> a ies:EpsgParameter1 ;
+    ies:inRepresentation <http://stonesoup.dstl.gov.uk/985c4d41-76fe-4531-8631-5472ac1d4447> ;
+    ies:representationValue "613552.5275004548" .
+
+<http://stonesoup.dstl.gov.uk/bb514a54-b751-4e16-93f5-45828424bf8a> a ies:EpsgParameter2 ;
+    ies:inRepresentation <http://stonesoup.dstl.gov.uk/26effaa9-f00f-4c09-891f-965e64fb0b87> ;
+    ies:representationValue "5637271.300320299" .
+
+<http://stonesoup.dstl.gov.uk/e5b71520-c6de-4797-8889-c571ebcca590> a ies:EpsgParameter1 ;
+    ies:inRepresentation <http://stonesoup.dstl.gov.uk/26effaa9-f00f-4c09-891f-965e64fb0b87> ;
+    ies:representationValue "613552.5275004548" .
+
+data:362df60a-c586-4b12-b13a-920e4a0aaa58 a ies:Identifier ;
+    ies:inScheme <http://itu.int#mmsi-NamingScheme> ;
+    ies:representationValue "235006680"^^xsd:string .
+
+data:a1d5b241-a959-45e3-ae6e-50987d5b64c2 a ies:Name ;
+    ies:inScheme <http://itu.int#mmsi-NamingScheme> ;
+    ies:representationValue "MMSI"^^xsd:string .
+
+data:bb3c3ea4-5a13-45be-8c9a-25089d4f1da1 a ies:Name ;
+    ies:representationValue "International Telecommunications Union"^^xsd:string .
+
+iso8601:2016-01-12T14:24:11.218000 a ies:ParticularPeriod ;
+    ies:iso8601PeriodRepresentation "2016-01-12T14:24:11.218000"^^xsd:string .
+
+iso8601:2016-01-12T14:25:11.218000 a ies:ParticularPeriod ;
+    ies:iso8601PeriodRepresentation "2016-01-12T14:25:11.218000"^^xsd:string .
+
+iso8601:2016-01-12T14:26:11.218000 a ies:ParticularPeriod ;
+    ies:iso8601PeriodRepresentation "2016-01-12T14:26:11.218000"^^xsd:string .
+
+<http://itu.int> a ies:Organisation ;
+    ies:hasName data:bb3c3ea4-5a13-45be-8c9a-25089d4f1da1 .
+
+<http://stonesoup.dstl.gov.uk/19391ff7-6a3a-4abf-8efb-428c53410977> a ies:GeoPoint ;
+    ies:isIdentifiedBy <http://stonesoup.dstl.gov.uk/bf452287-679c-423b-80fd-04ac2ca75211> .
+
+<http://stonesoup.dstl.gov.uk/4fa4300c-698e-4e40-9eed-6d640d539da1> a ies:GeoPoint ;
+    ies:isIdentifiedBy <http://stonesoup.dstl.gov.uk/7e19abee-3efa-4391-958e-8ca75f796b2b> .
+
+<http://stonesoup.dstl.gov.uk/51c67e2c-2f2f-487d-8fa5-2f86f5db4dc3> a ies:GeoPoint ;
+    ies:isIdentifiedBy <http://stonesoup.dstl.gov.uk/26effaa9-f00f-4c09-891f-965e64fb0b87> .
+
+<http://stonesoup.dstl.gov.uk/80c93719-7274-4416-874c-4536c6194a78> a ies:GeoPoint ;
+    ies:isIdentifiedBy <http://stonesoup.dstl.gov.uk/272dccc5-b32a-4b5a-af6b-a2a356e50fc8> .
+
+<http://stonesoup.dstl.gov.uk/d818da4f-675b-48b5-a9b1-c449ab4eccd9> a ies:GeoPoint ;
+    ies:isIdentifiedBy <http://stonesoup.dstl.gov.uk/985c4d41-76fe-4531-8631-5472ac1d4447> .
+
+iso8601:2016-01-12T14:22:49.881000 a ies:ParticularPeriod ;
+    ies:iso8601PeriodRepresentation "2016-01-12T14:22:49.881000"^^xsd:string .
+
+iso8601:2016-01-12T14:27:11.218000 a ies:ParticularPeriod ;
+    ies:iso8601PeriodRepresentation "2016-01-12T14:27:11.218000"^^xsd:string .
+
+<http://itu.int#mmsi-NamingScheme> a ies:NamingScheme ;
+    ies:hasName data:a1d5b241-a959-45e3-ae6e-50987d5b64c2 ;
+    ies:schemeOwner <http://itu.int> .
+
+<http://stonesoup.dstl.gov.uk/16c83fa4-2d1a-4100-84d4-3b9a086aa442> a ies:LocationObservation ;
+    ies:inPeriod iso8601:2016-01-12T14:22:49.881000 ;
+    ies:isPartOf <http://stonesoup.dstl.gov.uk/bb26c992-3b00-4f5b-8497-556ae48a4099> .
+
+<http://stonesoup.dstl.gov.uk/5bad84d9-229e-425e-bc51-10e6b6fbda9c> a ies:LocationObservation ;
+    ies:inPeriod iso8601:2016-01-12T14:24:11.218000 ;
+    ies:isPartOf <http://stonesoup.dstl.gov.uk/bb26c992-3b00-4f5b-8497-556ae48a4099> .
+
+<http://stonesoup.dstl.gov.uk/67b8c423-02e3-439e-a53d-2fa21358edb2> a ies:LocationObservation ;
+    ies:inPeriod iso8601:2016-01-12T14:25:11.218000 ;
+    ies:isPartOf <http://stonesoup.dstl.gov.uk/bb26c992-3b00-4f5b-8497-556ae48a4099> .
+
+<http://stonesoup.dstl.gov.uk/8636f3e2-7ac1-4c4f-8a54-36117e0856bd> a ies:LocationObservation ;
+    ies:inPeriod iso8601:2016-01-12T14:27:11.218000 ;
+    ies:isPartOf <http://stonesoup.dstl.gov.uk/bb26c992-3b00-4f5b-8497-556ae48a4099> .
+
+<http://stonesoup.dstl.gov.uk/bdf6e2f5-3365-49af-ba7e-a7a2953fd690> a ies:LocationObservation ;
+    ies:inPeriod iso8601:2016-01-12T14:26:11.218000 ;
+    ies:isPartOf <http://stonesoup.dstl.gov.uk/bb26c992-3b00-4f5b-8497-556ae48a4099> .
+
+<http://stonesoup.dstl.gov.uk/26effaa9-f00f-4c09-891f-965e64fb0b87> a ies:EpsgGeoPointRepresentation .
+
+<http://stonesoup.dstl.gov.uk/272dccc5-b32a-4b5a-af6b-a2a356e50fc8> a ies:EpsgGeoPointRepresentation .
+
+<http://stonesoup.dstl.gov.uk/7e19abee-3efa-4391-958e-8ca75f796b2b> a ies:EpsgGeoPointRepresentation .
+
+<http://stonesoup.dstl.gov.uk/985c4d41-76fe-4531-8631-5472ac1d4447> a ies:EpsgGeoPointRepresentation .
+
+<http://stonesoup.dstl.gov.uk/bf452287-679c-423b-80fd-04ac2ca75211> a ies:EpsgGeoPointRepresentation .
+
+<http://stonesoup.dstl.gov.uk/_MMSI_235006680> a ies:LocationTransponder ;
+    ies:isIdentifiedBy data:362df60a-c586-4b12-b13a-920e4a0aaa58 .
+
+<http://stonesoup.dstl.gov.uk/bb26c992-3b00-4f5b-8497-556ae48a4099> a ies:Observation .
+

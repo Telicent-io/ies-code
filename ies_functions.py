@@ -28,6 +28,7 @@ organisation = URIRef(iesUri+"Organisation")
 namingScheme = URIRef(iesUri+"NamingScheme")
 latitude = URIRef(iesUri+"Latitude")
 longitude = URIRef(iesUri+"Longitude")
+identifier = URIRef(iesUri+"Identifier")
 commsIdentifier = URIRef(iesUri+"CommunicationsIdentifier")
 follow = URIRef(iesUri+"Follow")
 follower = URIRef(iesUri+"Follower")
@@ -40,39 +41,51 @@ assessor = URIRef(iesUri+"Assessor")
 name = URIRef(iesUri+"Name")
 #New stuff, not yet approved !
 classOfMeasure = URIRef(iesUri+"ClassOfMeasure")
-measurement = URIRef(iesUri+"Measurement")
-unitOfMeasure = URIRef(iesUri+"UnitOfMeasure")
+epsgParams = [URIRef(iesUri+"EpsgParameter1"),URIRef(iesUri+"EpsgParameter2"),URIRef(iesUri+"EpsgParameter3"),URIRef(iesUri+"EpsgParameter4")]
+epsgRep = URIRef(iesUri+"EpsgGeoPointRepresentation")
 measure = URIRef(iesUri+"Measure")
+measurement = URIRef(iesUri+"Measurement")
 measureValue = URIRef(iesUri+"MeasureValue")
+unitOfMeasure = URIRef(iesUri+"UnitOfMeasure")
+
+
 
 #Now the IES predicates (properties / relationships) we'll be using
-ipo = URIRef(iesUri+"isParticipationOf")
-ipi = URIRef(iesUri+"isParticipantIn")
-iib = URIRef(iesUri+"isIdentifiedBy")
-hn = URIRef(iesUri+"hasName")
-ip = URIRef(iesUri+"inPeriod")
-so = URIRef(iesUri+"schemeOwner")
-rv = URIRef(iesUri+"representationValue")
-ins = URIRef(iesUri+"inScheme")
-ipao = URIRef(iesUri+"isPartOf")
-isoP = URIRef(iesUri+"iso8601PeriodRepresentation")
-iso = URIRef(iesUri+"isStartOf")
-ieo = URIRef(iesUri+"isEndOf")
 ass = URIRef(iesUri+"assessed")
+hn = URIRef(iesUri+"hasName")
 hv = URIRef(iesUri+"hasValue")
+ieo = URIRef(iesUri+"isEndOf")
+iib = URIRef(iesUri+"isIdentifiedBy")
+ins = URIRef(iesUri+"inScheme")
+ip = URIRef(iesUri+"inPeriod")
+ipao = URIRef(iesUri+"isPartOf")
+ipi = URIRef(iesUri+"isParticipantIn")
+ipo = URIRef(iesUri+"isParticipationOf")
+ir = URIRef(iesUri+"inRepresentation")
+iso = URIRef(iesUri+"isStartOf")
+isoP = URIRef(iesUri+"iso8601PeriodRepresentation")
 mu = URIRef(iesUri+"measureUnit")
+rv = URIRef(iesUri+"representationValue")
+so = URIRef(iesUri+"schemeOwner")
 #New stuff, not yet approved !
-och = URIRef(iesUri+"observedCharacteristic")
+ec = URIRef(iesUri+"epsgCode")
 mc = URIRef(iesUri+"measureClass")
+och = URIRef(iesUri+"observedCharacteristic")
+
 
 mmsiNs = URIRef(ituUri+"#mmsi-NamingScheme") #Make a URI for the MMSI naming schema from the ITU's URI 
+
+
+def setDataUri(uri):
+    global dataUri
+    dataUri = uri
 
 #delete all triples in the graph
 def clearGraph(iesGraph):
     iesGraph.remove((None, None, None))
 
 #clears the graph and adds all the boilerplate stuff
-def initialiseGraph(iesGraph):
+def initialiseGraph(iesGraph=None):
     if iesGraph is None:
         iesGraph = Graph()
     clearGraph(iesGraph=iesGraph)
@@ -180,21 +193,30 @@ def addNamingSchemes(iesGraph):
     #Make the ITU the owner of that naming scheme
     addToGraph(iesGraph=iesGraph,subject=mmsiNs,predicate=so,obj=URIRef(ituUri))
 
+def addIdentifier(iesGraph,identifiedItem,idText,idUri=URIRef(generateDataUri()),idClass=identifier,idRelType = iib,namingScheme=None):
+    instantiate(iesGraph=iesGraph,_class=identifier,instance=idUri)
+    addToGraph(iesGraph=iesGraph,subject=idUri,predicate=rv,obj=Literal(idText, datatype=XSD.string))
+    addToGraph(iesGraph=iesGraph,subject=identifiedItem,predicate=idRelType,obj=idUri)
+    if namingScheme:
+        addToGraph(iesGraph=iesGraph,subject=idUri,predicate=ins,obj=namingScheme)
+
+def createIdentifiedEntity(iesGraph,entityClass,entityID,idClass=identifier,namingScheme=None,uri=None):
+    if idClass==mmsiNs:
+        uri = URIRef(dataUri+"MMSI_"+entityID)
+        idObj = URIRef(dataUri+"MMSI_"+entityID+"_idObj")
+        addIdentifier(iesGraph,uri,entityID,idUri=idObj,idClass=commsIdentifier,namingScheme=mmsiNs)
+    else:
+        if uri == None:
+            uri = generateDataUri()
+        addIdentifier(iesGraph,uri,entityID,idClass=idClass,namingScheme=namingScheme)
+
+    obsEnt = instantiate(iesGraph,entityClass,uri)
+    return(uri)
+
 #This is used in both the following and track use cases.
 def createLocationTransponder(iesGraph,mmsi):
-    #COnstruct a URI based on its mmsi
-    myLT = URIRef(dataUri+"MMSI_"+mmsi)
-    #Check to see if we already have it in the graph, and create if not - rdflib should just overwrite, but we've seen some exceptions so best to check
-    if not inGraph(iesGraph=iesGraph,subject=myLT,predicate=RDF.type,obj=locationTransponder):
-        instantiate(iesGraph=iesGraph,_class=locationTransponder,instance=myLT)
-        #Add the id object
-        ltId = URIRef(dataUri+"MMSI_"+mmsi+"_idObj")
-        instantiate(iesGraph=iesGraph,_class=commsIdentifier,instance=ltId)
-        addToGraph(iesGraph=iesGraph,subject=ltId,predicate=rv,obj=Literal(mmsi, datatype=XSD.string))
-        addToGraph(iesGraph=iesGraph,subject=myLT,predicate=iib,obj=ltId)
-        #Now put the comms ID in the naming scheme...
-        addToGraph(iesGraph=iesGraph,subject=ltId,predicate=ins,obj=mmsiNs)
-    return myLT
+    return createIdentifiedEntity(iesGraph=iesGraph,entityClass=locationTransponder,entityID=mmsi,namingScheme=mmsiNs)
+
 
 #Instantiate an IES System class
 def createSystem(iesGraph,sysName):
