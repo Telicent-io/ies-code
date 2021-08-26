@@ -47,6 +47,9 @@ measure = URIRef(iesUri+"Measure")
 measurement = URIRef(iesUri+"Measurement")
 measureValue = URIRef(iesUri+"MeasureValue")
 unitOfMeasure = URIRef(iesUri+"UnitOfMeasure")
+vessel = URIRef(iesUri+"Vessel")
+cooper = URIRef(iesUri+"CooperAtSea")
+coopering = URIRef(iesUri+"CooperingAtSea")
 
 
 
@@ -193,22 +196,24 @@ def addNamingSchemes(iesGraph):
     #Make the ITU the owner of that naming scheme
     addToGraph(iesGraph=iesGraph,subject=mmsiNs,predicate=so,obj=URIRef(ituUri))
 
-def addIdentifier(iesGraph,identifiedItem,idText,idUri=URIRef(generateDataUri()),idClass=identifier,idRelType = iib,namingScheme=None):
+def addIdentifier(iesGraph,identifiedItem,idText,idUri=None,idClass=identifier,idRelType = iib,namingScheme=None):
+    if idUri == None:
+        idUri = idText
     instantiate(iesGraph=iesGraph,_class=identifier,instance=idUri)
     addToGraph(iesGraph=iesGraph,subject=idUri,predicate=rv,obj=Literal(idText, datatype=XSD.string))
     addToGraph(iesGraph=iesGraph,subject=identifiedItem,predicate=idRelType,obj=idUri)
     if namingScheme:
         addToGraph(iesGraph=iesGraph,subject=idUri,predicate=ins,obj=namingScheme)
 
-def createIdentifiedEntity(iesGraph,entityClass,entityID,idClass=identifier,namingScheme=None,uri=None):
+def createIdentifiedEntity(iesGraph,entityClass,idText,idClass=identifier,namingScheme=None,uri=None):
     if idClass==mmsiNs:
-        uri = URIRef(dataUri+"MMSI_"+entityID)
-        idObj = URIRef(dataUri+"MMSI_"+entityID+"_idObj")
-        addIdentifier(iesGraph,uri,entityID,idUri=idObj,idClass=commsIdentifier,namingScheme=mmsiNs)
+        uri = URIRef(dataUri+"MMSI_"+idText)
+        idObj = URIRef(dataUri+"MMSI_"+idText+"_idObj")
+        addIdentifier(iesGraph,uri,idText,idUri=idObj,idClass=commsIdentifier,namingScheme=mmsiNs)
     else:
         if uri == None:
             uri = generateDataUri()
-        addIdentifier(iesGraph,uri,entityID,idClass=idClass,namingScheme=namingScheme)
+        addIdentifier(iesGraph,uri,idText,idClass=idClass,namingScheme=namingScheme)
 
     obsEnt = instantiate(iesGraph,entityClass,uri)
     return(uri)

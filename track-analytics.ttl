@@ -1,0 +1,97 @@
+@prefix data: <http://ais.data.gov.uk/ais-ies-test#> .
+@prefix ies: <http://ies.data.gov.uk/ontology/ies4#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://trackanalytics.dstl.gov.uk/01538a95-0cff-4618-bc0b-f50f785d60e6> a ies:BoundingState ;
+    ies:inPeriod <http://iso.org/iso8601#2021-08-11T12:50:41> ;
+    ies:isEndOf <http://trackanalytics.dstl.gov.uk/2890e84a-cbeb-4114-b84b-083be6be79ba> .
+
+<http://trackanalytics.dstl.gov.uk/619c0c5e-fa71-4c71-b8a8-9543e5909271> a ies:BoundingState ;
+    ies:inPeriod <http://iso.org/iso8601#2021-08-11T14:01:22> ;
+    ies:isEndOf <http://trackanalytics.dstl.gov.uk/9355733c-0202-45b7-839b-bcaf7fbcba9a> .
+
+<http://trackanalytics.dstl.gov.uk/81577f2b-ccd8-4ea7-8896-354a11e37364> a ies:BoundingState ;
+    ies:inPeriod <http://iso.org/iso8601#2021-08-11T10:47:48> ;
+    ies:isStartOf <http://trackanalytics.dstl.gov.uk/2890e84a-cbeb-4114-b84b-083be6be79ba> .
+
+<http://trackanalytics.dstl.gov.uk/856dbc64-5c03-4190-b345-076a762c25c7> a ies:BoundingState ;
+    ies:inPeriod <http://iso.org/iso8601#2021-08-11T14:01:22> ;
+    ies:isEndOf <http://trackanalytics.dstl.gov.uk/4cf61708-1cbb-4870-9b02-8215cc187b27> .
+
+<http://trackanalytics.dstl.gov.uk/b8dc3202-7c5f-4bda-8103-9d1cbeddbc0b> a ies:BoundingState ;
+    ies:inPeriod <http://iso.org/iso8601#2021-08-11T14:01:22> ;
+    ies:isEndOf <http://trackanalytics.dstl.gov.uk/3e63b6de-f446-4e9d-860c-1622c22252b9> .
+
+<http://trackanalytics.dstl.gov.uk/cca3b0b1-91a2-4435-9817-621071ebffaa> a ies:BoundingState ;
+    ies:inPeriod <http://iso.org/iso8601#2021-08-11T11:18:15> ;
+    ies:isStartOf <http://trackanalytics.dstl.gov.uk/4cf61708-1cbb-4870-9b02-8215cc187b27> .
+
+<http://trackanalytics.dstl.gov.uk/d74c9f25-bde9-4bff-80a3-039eb872a4d2> a ies:BoundingState ;
+    ies:inPeriod <http://iso.org/iso8601#2021-08-11T10:47:48> ;
+    ies:isStartOf <http://trackanalytics.dstl.gov.uk/9355733c-0202-45b7-839b-bcaf7fbcba9a> .
+
+<http://trackanalytics.dstl.gov.uk/ef9ae541-e0ee-4f5e-bfd0-2e78becc9768> a ies:BoundingState ;
+    ies:inPeriod <http://iso.org/iso8601#2021-08-11T10:47:48> ;
+    ies:isStartOf <http://trackanalytics.dstl.gov.uk/3e63b6de-f446-4e9d-860c-1622c22252b9> .
+
+data:65b7679c-542c-47e0-ad66-7a7985123eb8 a ies:Name ;
+    ies:representationValue "International Telecommunications Union"^^xsd:string .
+
+data:d166f86c-dfb2-4cc8-9a66-41aeaca66626 a ies:Name ;
+    ies:inScheme <http://itu.int#mmsi-NamingScheme> ;
+    ies:representationValue "MMSI"^^xsd:string .
+
+<http://iso.org/iso8601#2021-08-11T11:18:15> a ies:ParticularPeriod ;
+    ies:iso8601PeriodRepresentation "2021-08-11T11:18:15"^^xsd:string .
+
+<http://iso.org/iso8601#2021-08-11T12:50:41> a ies:ParticularPeriod ;
+    ies:iso8601PeriodRepresentation "2021-08-11T12:50:41"^^xsd:string .
+
+<http://itu.int> a ies:Organisation ;
+    ies:hasName data:65b7679c-542c-47e0-ad66-7a7985123eb8 .
+
+<http://trackanalytics.dstl.gov.uk/77b229b1-9510-4512-8d67-1feb6aa3737a> a ies:Vessel ;
+    ies:isIdentifiedBy <http://trackanalytics.dstl.gov.uk/_vessel_mmsi_235083854> .
+
+<http://trackanalytics.dstl.gov.uk/90c51d3c-9735-4b1f-b0a3-78569601398f> a ies:Vessel ;
+    ies:isIdentifiedBy <http://trackanalytics.dstl.gov.uk/_vessel_mmsi_356793000> .
+
+<http://trackanalytics.dstl.gov.uk/_vessel_mmsi_234234000> a ies:Identifier ;
+    ies:inScheme <http://itu.int#mmsi-NamingScheme> ;
+    ies:representationValue "http://trackanalytics.dstl.gov.uk/_vessel_mmsi_234234000"^^xsd:string .
+
+<http://trackanalytics.dstl.gov.uk/_vessel_mmsi_235083854> a ies:Identifier ;
+    ies:inScheme <http://itu.int#mmsi-NamingScheme> ;
+    ies:representationValue "http://trackanalytics.dstl.gov.uk/_vessel_mmsi_235083854"^^xsd:string .
+
+<http://trackanalytics.dstl.gov.uk/_vessel_mmsi_356793000> a ies:Identifier ;
+    ies:inScheme <http://itu.int#mmsi-NamingScheme> ;
+    ies:representationValue "http://trackanalytics.dstl.gov.uk/_vessel_mmsi_356793000"^^xsd:string .
+
+<http://trackanalytics.dstl.gov.uk/bff17c87-7661-44aa-935e-8939b5d8e9cc> a ies:Vessel ;
+    ies:isIdentifiedBy <http://trackanalytics.dstl.gov.uk/_vessel_mmsi_234234000> .
+
+<http://trackanalytics.dstl.gov.uk/2890e84a-cbeb-4114-b84b-083be6be79ba> a ies:CooperingAtSea ;
+    ies:isParticipantIn <http://trackanalytics.dstl.gov.uk/9355733c-0202-45b7-839b-bcaf7fbcba9a> ;
+    ies:isParticipationOf <http://trackanalytics.dstl.gov.uk/77b229b1-9510-4512-8d67-1feb6aa3737a> .
+
+<http://trackanalytics.dstl.gov.uk/3e63b6de-f446-4e9d-860c-1622c22252b9> a ies:CooperingAtSea ;
+    ies:isParticipantIn <http://trackanalytics.dstl.gov.uk/9355733c-0202-45b7-839b-bcaf7fbcba9a> ;
+    ies:isParticipationOf <http://trackanalytics.dstl.gov.uk/bff17c87-7661-44aa-935e-8939b5d8e9cc> .
+
+<http://trackanalytics.dstl.gov.uk/4cf61708-1cbb-4870-9b02-8215cc187b27> a ies:CooperingAtSea ;
+    ies:isParticipantIn <http://trackanalytics.dstl.gov.uk/9355733c-0202-45b7-839b-bcaf7fbcba9a> ;
+    ies:isParticipationOf <http://trackanalytics.dstl.gov.uk/90c51d3c-9735-4b1f-b0a3-78569601398f> .
+
+<http://iso.org/iso8601#2021-08-11T10:47:48> a ies:ParticularPeriod ;
+    ies:iso8601PeriodRepresentation "2021-08-11T10:47:48"^^xsd:string .
+
+<http://iso.org/iso8601#2021-08-11T14:01:22> a ies:ParticularPeriod ;
+    ies:iso8601PeriodRepresentation "2021-08-11T14:01:22"^^xsd:string .
+
+<http://itu.int#mmsi-NamingScheme> a ies:NamingScheme ;
+    ies:hasName data:d166f86c-dfb2-4cc8-9a66-41aeaca66626 ;
+    ies:schemeOwner <http://itu.int> .
+
+<http://trackanalytics.dstl.gov.uk/9355733c-0202-45b7-839b-bcaf7fbcba9a> a ies:CooperAtSea .
+
