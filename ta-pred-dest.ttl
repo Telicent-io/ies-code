@@ -1,0 +1,151 @@
+@prefix data: <http://ais.data.gov.uk/ais-ies-test#> .
+@prefix ies: <http://ies.data.gov.uk/ontology/ies4#> .
+@prefix iso8601: <http://iso.org/iso8601#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+data:0e8f0b06-4625-40fe-a30d-668a28e41b99 a ies:Assessor ;
+    ies:isParticipantIn data:9632b956-84aa-493e-b4f7-afc96ff19696 ;
+    ies:isParticipationOf <http://trackanalytics.dstl.gov.uk/TrackAnalytics> .
+
+data:3dabd219-76fd-4997-9dac-d100691c7b86 a ies:VehicleUsed ;
+    ies:isPartOf data:2c069935-d68f-46ce-9a6d-d5da31f81e30 ;
+    ies:isParticipantIn data:b39eccea-7a16-4d0e-a798-824abb6704fa ;
+    ies:isParticipationOf data:decd28d1-2035-4ad6-ad87-f88a2f80a683 .
+
+data:68e1738a-19fe-44d4-84f8-25c74b578835 a ies:VehicleUsed ;
+    ies:isPartOf data:176c0bbe-1677-418a-8751-3c0c932ab6b0 ;
+    ies:isParticipantIn data:21e3311a-64ed-4ce7-98af-b2af23ce4464 ;
+    ies:isParticipationOf data:decd28d1-2035-4ad6-ad87-f88a2f80a683 .
+
+data:7c4f5871-82da-431f-ba21-bb19fdd86863 a ies:Assessor ;
+    ies:isParticipantIn data:541cd4a0-4075-4897-a1a6-178e74f59ee2 ;
+    ies:isParticipationOf <http://trackanalytics.dstl.gov.uk/TrackAnalytics> .
+
+data:8d7fc367-eaf4-4445-afa6-d9571495393d a ies:Arrival ;
+    ies:inLocation <http://www.un.org/locode#GBAMT> ;
+    ies:isEndOf data:21e3311a-64ed-4ce7-98af-b2af23ce4464 ;
+    ies:isPartOf data:176c0bbe-1677-418a-8751-3c0c932ab6b0 .
+
+data:9b0b3966-54e8-4199-bd32-1af5c390183d a ies:Arrival ;
+    ies:inLocation <http://www.un.org/locode#GBHUL> ;
+    ies:isEndOf data:b39eccea-7a16-4d0e-a798-824abb6704fa ;
+    ies:isPartOf data:2c069935-d68f-46ce-9a6d-d5da31f81e30 .
+
+data:b11a1a22-056c-49b6-90b2-e1b929c10e15 a ies:Assessor ;
+    ies:isParticipantIn data:d18ac04b-9a87-4e71-9ec5-077e05f1d365 ;
+    ies:isParticipationOf <http://trackanalytics.dstl.gov.uk/TrackAnalytics> .
+
+data:b3e0d7bb-39fa-4afd-81ed-fc22737a21f2 a ies:Arrival ;
+    ies:inLocation <http://www.un.org/locode#GBPOF> ;
+    ies:isEndOf data:858ecb81-5d85-4e07-9600-ea98652511a0 ;
+    ies:isPartOf data:5d578785-07a9-499f-b742-fe061359a371 .
+
+data:c2f75497-b2a0-4286-be99-3fcdb67323f4 a ies:VehicleUsed ;
+    ies:isPartOf data:5d578785-07a9-499f-b742-fe061359a371 ;
+    ies:isParticipantIn data:858ecb81-5d85-4e07-9600-ea98652511a0 ;
+    ies:isParticipationOf data:decd28d1-2035-4ad6-ad87-f88a2f80a683 .
+
+data:10e9a69a-face-4523-b78d-841e297f8fc2 a ies:PlaceName ;
+    ies:representationValue "Hull"^^xsd:string .
+
+data:1fd2b104-5646-4b31-9d65-48403ee0070c a ies:UN_LOCODE ;
+    ies:representationValue "GB POF"^^xsd:string .
+
+data:30221b40-296e-487b-939a-40007411e0f5 a ies:ProbabilityRepresentation ;
+    ies:representationValue "0.2"^^xsd:float .
+
+data:4e04fe1d-cd66-4f7e-85f9-c0b0775fb26d a ies:CommunicationsIdentifier ;
+    ies:inScheme <http://itu.int#mmsi-NamingScheme> ;
+    ies:representationValue "http://trackanalytics.dstl.gov.uk/_vessel_mmsi_234234000"^^xsd:string .
+
+data:541cd4a0-4075-4897-a1a6-178e74f59ee2 a ies:AssessToBeUnlikely ;
+    ies:assessed data:2c069935-d68f-46ce-9a6d-d5da31f81e30 ;
+    ies:hasRepresentation data:febfa96c-65c1-40c4-9bab-f5ce1f383870 ;
+    ies:inPeriod iso8601:2021-08-12T09:00:00 .
+
+data:606162cf-3079-44c7-a5dc-3a75386b2bca a ies:PlaceName ;
+    ies:representationValue "Ackworth"^^xsd:string .
+
+data:629b9bfc-ba20-40df-b44a-a160d7632df0 a ies:UN_LOCODE ;
+    ies:representationValue "GB HUL"^^xsd:string .
+
+data:679f6f11-7d2a-47c7-b698-a9ac5d8742c1 a ies:UN_LOCODE ;
+    ies:representationValue "GB AMT "^^xsd:string .
+
+data:927340f0-ed21-4046-bc02-ac018ffe9c5e a ies:ProbabilityRepresentation ;
+    ies:representationValue "0.5"^^xsd:float .
+
+data:9632b956-84aa-493e-b4f7-afc96ff19696 a ies:AssessToBeHighlyUnlikely ;
+    ies:assessed data:176c0bbe-1677-418a-8751-3c0c932ab6b0 ;
+    ies:hasRepresentation data:30221b40-296e-487b-939a-40007411e0f5 ;
+    ies:inPeriod iso8601:2021-08-12T09:00:00 .
+
+data:b0c73479-b587-42ca-b9fa-f9e832e34ae0 a ies:Name ;
+    ies:inScheme <http://itu.int#mmsi-NamingScheme> ;
+    ies:representationValue "MMSI"^^xsd:string .
+
+data:d18ac04b-9a87-4e71-9ec5-077e05f1d365 a ies:AssessToBeRealisticPossibility ;
+    ies:assessed data:5d578785-07a9-499f-b742-fe061359a371 ;
+    ies:hasRepresentation data:927340f0-ed21-4046-bc02-ac018ffe9c5e ;
+    ies:inPeriod iso8601:2021-08-12T09:00:00 .
+
+data:e22f4708-940a-499c-8aa1-50b66fc9d700 a ies:Name ;
+    ies:representationValue "International Telecommunications Union"^^xsd:string .
+
+data:fbda7471-be12-4a39-a831-bf215d3ab7b3 a ies:PlaceName ;
+    ies:representationValue "Pontefract"^^xsd:string .
+
+data:febfa96c-65c1-40c4-9bab-f5ce1f383870 a ies:ProbabilityRepresentation ;
+    ies:representationValue "0.3"^^xsd:float .
+
+<http://iso.org/iso3166-alpha3#GBR_code> a ies:ISO3166Alpha_3 ;
+    ies:representationValue "GBR"^^xsd:string .
+
+<http://itu.int> a ies:Organisation ;
+    ies:hasName data:e22f4708-940a-499c-8aa1-50b66fc9d700 .
+
+<http://www.un.org/locode#GBAMT> a ies:Port ;
+    ies:hasName data:606162cf-3079-44c7-a5dc-3a75386b2bca ;
+    ies:isIdentifiedBy data:679f6f11-7d2a-47c7-b698-a9ac5d8742c1 ;
+    ies:isPartOf <http://iso.org/iso3166-alpha3#GBR> .
+
+<http://www.un.org/locode#GBHUL> a ies:Port ;
+    ies:hasName data:10e9a69a-face-4523-b78d-841e297f8fc2 ;
+    ies:isIdentifiedBy data:629b9bfc-ba20-40df-b44a-a160d7632df0 ;
+    ies:isPartOf <http://iso.org/iso3166-alpha3#GBR> .
+
+<http://www.un.org/locode#GBPOF> a ies:Port ;
+    ies:hasName data:fbda7471-be12-4a39-a831-bf215d3ab7b3 ;
+    ies:isIdentifiedBy data:1fd2b104-5646-4b31-9d65-48403ee0070c ;
+    ies:isPartOf <http://iso.org/iso3166-alpha3#GBR> .
+
+data:21e3311a-64ed-4ce7-98af-b2af23ce4464 a ies:Sailing ;
+    ies:isPartOf data:176c0bbe-1677-418a-8751-3c0c932ab6b0 .
+
+data:858ecb81-5d85-4e07-9600-ea98652511a0 a ies:Sailing ;
+    ies:isPartOf data:5d578785-07a9-499f-b742-fe061359a371 .
+
+data:b39eccea-7a16-4d0e-a798-824abb6704fa a ies:Sailing ;
+    ies:isPartOf data:2c069935-d68f-46ce-9a6d-d5da31f81e30 .
+
+<http://itu.int#mmsi-NamingScheme> a ies:NamingScheme ;
+    ies:hasName data:b0c73479-b587-42ca-b9fa-f9e832e34ae0 ;
+    ies:schemeOwner <http://itu.int> .
+
+data:decd28d1-2035-4ad6-ad87-f88a2f80a683 a ies:Vessel ;
+    ies:isIdentifiedBy data:4e04fe1d-cd66-4f7e-85f9-c0b0775fb26d .
+
+<http://iso.org/iso3166-alpha3#GBR> a ies:Country ;
+    ies:isIdentifiedBy <http://iso.org/iso3166-alpha3#GBR_code> .
+
+iso8601:2021-08-12T09:00:00 a ies:ParticularPeriod ;
+    ies:iso8601PeriodRepresentation "2021-08-12T09:00:00"^^xsd:string .
+
+<http://trackanalytics.dstl.gov.uk/TrackAnalytics> a ies:System .
+
+data:176c0bbe-1677-418a-8751-3c0c932ab6b0 a ies:PossibleWorld .
+
+data:2c069935-d68f-46ce-9a6d-d5da31f81e30 a ies:PossibleWorld .
+
+data:5d578785-07a9-499f-b742-fe061359a371 a ies:PossibleWorld .
+

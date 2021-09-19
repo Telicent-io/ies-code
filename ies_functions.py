@@ -17,6 +17,18 @@ dataUri = "http://ais.data.gov.uk/ais-ies-test#"
 
 #Now create some uri objects for the key IES classes we're going to be using - these are just in-memory reference data the python can use to easily instantiate our data
 #In production, we automate this from the schema, but that makes it quite hard to follow the code. For this, I've itemised out each class we use so it should make more sense
+arrival = URIRef(iesUri+"Arrival")
+assessor = URIRef(iesUri+"Assessor")
+assessProbability=URIRef(iesUri+"AssessProbability")
+assessToBeRemoteChance=URIRef(iesUri+"AssessToBeRemoteChance")
+assessToBeHighlyUnlikely=URIRef(iesUri+"AssessToBeHighlyUnlikely")
+assessToBeUnlikely=URIRef(iesUri+"AssessToBeUnlikely")
+assessToBeRealisticPossibility=URIRef(iesUri+"AssessToBeRealisticPossibility")
+assessToBeLikelyOrProbably=URIRef(iesUri+"AssessToBeLikelyOrProbably")
+assessToBeHighlyLikely=URIRef(iesUri+"AssessToBeHighlyLikely")
+assessToBeAlmostCertain=URIRef(iesUri+"AssessToBeAlmostCertain")
+country = URIRef(iesUri+"Country")
+iso3166A3 = URIRef(iesUri+"ISO3166Alpha_3")
 locationTransponder = URIRef(iesUri+"LocationTransponder")
 locationObservation = URIRef(iesUri+"LocationObservation")
 observation = URIRef(iesUri+"Observation")
@@ -34,11 +46,16 @@ follow = URIRef(iesUri+"Follow")
 follower = URIRef(iesUri+"Follower")
 followed = URIRef(iesUri+"Followed")
 boundingState = URIRef(iesUri+"BoundingState")
+phiaAssYard = URIRef(iesUri+"PhiaAssessmentYardStick")
 possibleWorld = URIRef(iesUri+"PossibleWorld")
+probabilityRepresentation = URIRef(iesUri+"ProbabilityRepresentation")
+sailing = URIRef(iesUri+"Sailing")
 system = URIRef(iesUri+"System")
 assess = URIRef(iesUri+"Assess")
-assessor = URIRef(iesUri+"Assessor")
 name = URIRef(iesUri+"Name")
+placeName = URIRef(iesUri+"PlaceName")
+port = URIRef(iesUri+"Port")
+unLocode=URIRef(iesUri+"UN_LOCODE")
 #New stuff, not yet approved !
 classOfMeasure = URIRef(iesUri+"ClassOfMeasure")
 epsgParams = [URIRef(iesUri+"EpsgParameter1"),URIRef(iesUri+"EpsgParameter2"),URIRef(iesUri+"EpsgParameter3"),URIRef(iesUri+"EpsgParameter4")]
@@ -50,12 +67,13 @@ unitOfMeasure = URIRef(iesUri+"UnitOfMeasure")
 vessel = URIRef(iesUri+"Vessel")
 cooper = URIRef(iesUri+"CooperAtSea")
 coopering = URIRef(iesUri+"CooperingAtSea")
-
+vehicleUsed = URIRef(iesUri+"VehicleUsed")
 
 
 #Now the IES predicates (properties / relationships) we'll be using
 ass = URIRef(iesUri+"assessed")
 hn = URIRef(iesUri+"hasName")
+hr = URIRef(iesUri+"hasRepresentation")
 hv = URIRef(iesUri+"hasValue")
 ieo = URIRef(iesUri+"isEndOf")
 iib = URIRef(iesUri+"isIdentifiedBy")
@@ -74,6 +92,7 @@ so = URIRef(iesUri+"schemeOwner")
 ec = URIRef(iesUri+"epsgCode")
 mc = URIRef(iesUri+"measureClass")
 och = URIRef(iesUri+"observedCharacteristic")
+il = URIRef(iesUri+"inLocation")
 
 
 mmsiNs = URIRef(ituUri+"#mmsi-NamingScheme") #Make a URI for the MMSI naming schema from the ITU's URI 
@@ -197,9 +216,7 @@ def addNamingSchemes(iesGraph):
     addToGraph(iesGraph=iesGraph,subject=mmsiNs,predicate=so,obj=URIRef(ituUri))
 
 def addIdentifier(iesGraph,identifiedItem,idText,idUri=None,idClass=identifier,idRelType = iib,namingScheme=None):
-    if idUri == None:
-        idUri = idText
-    instantiate(iesGraph=iesGraph,_class=identifier,instance=idUri)
+    idUri = instantiate(iesGraph=iesGraph,_class=idClass,instance=idUri)
     addToGraph(iesGraph=iesGraph,subject=idUri,predicate=rv,obj=Literal(idText, datatype=XSD.string))
     addToGraph(iesGraph=iesGraph,subject=identifiedItem,predicate=idRelType,obj=idUri)
     if namingScheme:
@@ -224,8 +241,47 @@ def createLocationTransponder(iesGraph,mmsi):
 
 
 #Instantiate an IES System class
-def createSystem(iesGraph,sysName):
-    sys = instantiate(iesGraph=iesGraph,_class=system)
+def createSystem(iesGraph,sysName,instance=None):
+    return instantiate(iesGraph=iesGraph,_class=system,instance=instance)
+
+#Note probability must be a float between 0.0 and 1.0.
+#items is a list of the things that are in the possible world
+def assessPwProbability(iesGraph,items,assessorSystem,probability,usePHIA=False,assessDate=''):
+    myPW = instantiate(iesGraph,possibleWorld)
+  
+    myAss = None
+    if usePHIA == True:
+        if probability <= 0.05:
+            myAss = instantiate(iesGraph,assessToBeRemoteChance)
+        elif probability <=0.225: #Sigh...PHIA probs have gaps. 
+            myAss = instantiate(iesGraph,assessToBeHighlyUnlikely)
+        elif probability <=0.375: #Sigh...PHIA probs have gaps. 
+            myAss = instantiate(iesGraph,assessToBeUnlikely)
+        elif probability <=0.525: #Sigh...PHIA probs have gaps. 
+            myAss = instantiate(iesGraph,assessToBeRealisticPossibility)
+        elif probability <=0.775: #Sigh...PHIA probs have gaps. 
+            myAss = instantiate(iesGraph,assessToBeLikelyOrProbably)
+        elif probability <=0.925: #Sigh...PHIA probs have gaps. 
+            myAss = instantiate(iesGraph,assessToBeHighlyLikely)
+        elif probability > 0.925: #Sigh...PHIA probs have gaps. 
+            myAss = instantiate(iesGraph,assessToBeAlmostCertain)
+    if myAss == None:
+        myAss = instantiate(iesGraph,assessProbability)
+    
+    addToGraph(iesGraph,myAss,ass,myPW)
+    myProp = instantiate(iesGraph,probabilityRepresentation)
+    addToGraph(iesGraph,myProp,rv,Literal(probability, datatype=XSD.float))
+    addToGraph(iesGraph,myAss,hr,myProp)
+    myAssessor = instantiate(iesGraph,assessor)
+    addToGraph(iesGraph,myAssessor,ipi,myAss)
+    addToGraph(iesGraph,myAssessor,ipo,assessorSystem)
+    
+    for item in items:
+        addToGraph(iesGraph,item,ipao,myPW)
+
+    if assessDate != '':
+        putInPeriod(iesGraph,myAss,assessDate)
+
 
 
 def saveRdf(graph,filename):
