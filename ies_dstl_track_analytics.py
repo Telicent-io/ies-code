@@ -9,16 +9,18 @@ dataUri="http://trackanalytics.dstl.gov.uk/"
 #The startTime and endTime parameters mark the beginning and end of the coopering activity
 #The vesselMmsiList is a list of MMSI identifiers for each of the vessels engaged in the coopering activity
 #The vesselStartTimeList and vesselEndTimeList are lists of the same length as vesselMmsiList
-def cooperingAtSea(iesGraph,startTime,endTime,vesselMmsiList,vesselStartTimeList=[],vesselEndTimeList=[]):
+def cooperingAtSea(iesGraph,startTime,endTime,vesselMmsiList,probability,assessmentDT,usePHIA,vesselStartTimeList=[],vesselEndTimeList=[]):
     vessels = []
     cooperEvent = ies.instantiate(iesGraph,_class=ies.cooper)
     if startTime != '':
         ies.startsIn(iesGraph,cooperEvent,startTime)
     if endTime != '':
         ies.endsIn(iesGraph,cooperEvent,endTime)
+    pwItems = [cooperEvent]  #things that need to be in a possible world
     for i,mmsi in enumerate(vesselMmsiList):
         vessel = ies.createIdentifiedEntity(iesGraph,ies.vessel,URIRef(dataUri+"_vessel_mmsi_"+mmsi),idClass=ies.commsIdentifier,namingScheme=ies.mmsiNs)
         coopering = ies.instantiate(iesGraph,_class=ies.coopering)
+        pwItems.append(coopering)
         ies.addToGraph(iesGraph,coopering,ies.ipi,cooperEvent)
         ies.addToGraph(iesGraph,coopering,ies.ipo,vessel)
         if len(vesselStartTimeList) == len (vesselMmsiList) and len(vesselStartTimeList) > i:
@@ -29,6 +31,7 @@ def cooperingAtSea(iesGraph,startTime,endTime,vesselMmsiList,vesselStartTimeList
             vet = vesselEndTimeList[i]
             if vet != None and vet !='':
                 ies.endsIn(iesGraph,coopering,vet)
+    ies.assessPwProbability(iesGraph,pwItems,TrackAnalytics,probability=probability,usePHIA=usePHIA,assessDate=assessmentDT) #Add the probability of the coopering
     return cooperEvent
 
 
@@ -41,8 +44,8 @@ def testCooper():
     vesselSTs = ["2021-08-11T10:47:48","2021-08-11T10:47:48","2021-08-11T11:18:15"] #The third vessel joins late
     vesselETs = ["2021-08-11T14:01:22","2021-08-11T12:50:41","2021-08-11T14:01:22"] #The second vessel leaves early
 
-    cooper = cooperingAtSea(iesGraph,startTime,endTime,mmsis,vesselSTs,vesselETs)
-    ies.assessPwProbability(iesGraph,[cooper],TrackAnalytics,0.3,True,"2021-08-12T09:00:00") #Add the probability of the coopering
+    cooper = cooperingAtSea(iesGraph,startTime,endTime,mmsis,0.3,"2021-08-12T09:00:00",True,vesselSTs,vesselETs)
+    
 
     ies.saveRdf(iesGraph,"track-analytics.ttl")
 
@@ -84,5 +87,5 @@ def testDestination():
 
 iesGraph = ies.initialiseGraph()
 TrackAnalytics = ies.createSystem(iesGraph,"TrackAnalytics",URIRef("http://trackanalytics.dstl.gov.uk/TrackAnalytics"))
-#testCooper()
-testDestination()
+testCooper()
+#testDestination()
