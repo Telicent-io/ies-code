@@ -2,6 +2,11 @@
 @prefix 			rdf: 		<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix 			rdfs: 		<http://www.w3.org/2000/01/rdf-schema#> .
 
-ies:Vessel           	rdf:type 		    rdfs:Class .
-ies:Vessel 	            rdfs:subClassOf 	ies:Vehicle .
-ies:Ship 	            rdfs:subClassOf 	ies:Vessel .
+ies:Vessel           	    rdf:type 		    rdfs:Class .
+ies:Vessel 	                rdfs:subClassOf 	ies:Vehicle .
+ies:Vessel 	                rdfs:subClassOf 	ies:VesselState .
+ies:VesselState        	    rdf:type 		    rdfs:Class .
+ies:VesselState 	        rdfs:subClassOf 	ies:VehicleState .
+ies:Ship 	                rdfs:subClassOf 	ies:Vessel .
+ies:UnderFlagOfConvenience  rdf:type 		    rdfs:Class .
+ies:UnderFlagOfConvenience 	rdfs:subClassOf 	ies:VesselState .

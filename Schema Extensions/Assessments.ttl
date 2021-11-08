@@ -4,6 +4,12 @@
 
 ies:Assess	 			            rdf:type 		    rdfs:Class .
 ies:Assess	 			            rdfs:subClassOf 	ies:Event .
+ies:AssessProbability	 	        rdf:type 		    rdfs:Class .
+ies:AssessProbability 	 	        rdfs:subClassOf 	ies:Assess .
+ies:ProbabilityRepresentation       rdf:type 		    rdfs:Class .
+ies:ProbabilityRepresentation       rdfs:subClassOf     rdfs:NumericRepresentation .
+ies:NumericRepresentation           rdf:type 		    rdfs:Class .
+ies:NumericRepresentation           rdfs:subClassOf     rdfs:Representation .
 ies:AssessToBeTrue			        rdfs:subClassOf 	ies:Assess .
 ies:PhiaAssessmentYardstick 		rdf:type 		    rdfs:Class .
 ies:PhiaAssessmentYardstick 		rdfs:subClassOf 	ies:ClassOfEventEvent .
